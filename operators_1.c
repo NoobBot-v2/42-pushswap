@@ -12,14 +12,50 @@
 
 #include "pushswap.h"
 
-void	rotate_up(s_stack *stack)
+void rotate_up(s_stack *stack)
 {
-	stack -> start = (stack -> start + 1) % stack -> cap;
+	s_number first;
+	int i;
+	int from;
+	int to;
+	int last;
+
+	if (stack->cnt <= 1)
+		return;
+	first = stack->array[stack->start];
+	i = 0;
+	while (i < stack->cnt - 1)
+	{
+		from = (stack->start + i + 1) % stack->cap;
+		to   = (stack->start + i) % stack->cap;
+		stack->array[to] = stack->array[from];
+		i++;
+	}
+	last = (stack->start + stack->cnt - 1) % stack->cap;
+	stack->array[last] = first;
 }
 
-void	rotate_down(s_stack *stack)
+void rotate_down(s_stack *stack)
 {
-	stack -> start = (stack -> start - 1 + stack -> cap) % stack -> cap;
+	int last;
+	int i;
+	int from;
+	int to;
+	s_number first;
+
+	if (stack->cnt <= 1)
+		return;
+	last = (stack->start + stack->cnt - 1) % stack->cap;
+	first = stack->array[last];
+	i = stack->cnt - 1;
+	while (i > 0)
+	{
+		from = (stack->start + i - 1 + stack->cap) % stack->cap;
+		to   = (stack->start + i) % stack->cap;
+		stack->array[to] = stack->array[from];
+		i--;
+	}
+	stack->array[stack->start] = first;
 }
 
 void push(s_stack *stk_a, s_stack *stk_b)
