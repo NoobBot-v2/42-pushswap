@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   stack.c                                            :+:      :+:    :+:   */
+/*   stack_1.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jsoh <jsoh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 18:58:27 by jsoh              #+#    #+#             */
-/*   Updated: 2025/08/24 16:43:41 by jsoh             ###   ########.fr       */
+/*   Updated: 2025/08/24 18:23:54 by jsoh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,11 @@ void	stack_create(s_stack **stack, int size, char type)
 	if (!(*stack)->array)
 		return ;
 	if (type == 'a')
-		(*stack)->count = size - 1;
+		(*stack)->cnt = size - 1;
 	else if (type == 'b')
-		(*stack)->count = 0;
+		(*stack)->cnt = 0;
 	(*stack)->start = 0;
-	(*stack)->capacity = size;
+	(*stack)->cap = size;
 	printf("Stack created\n");
 }
 
@@ -34,7 +34,7 @@ void	stack_init(s_stack *stack, char const *argv[])
 	int	index;
 
 	index = 0;
-	while (index < stack->count)
+	while (index < stack->cnt)
 	{
 		stack -> array[index].num = ft_atoi(argv[index + 1]);
 		stack -> array[index].dest = -1;
@@ -45,12 +45,43 @@ void	stack_init(s_stack *stack, char const *argv[])
 void	stack_view(s_stack *stack)
 {
 	int	index;
+	int	stk_idx;
 
 	index = 0;
-	while (index < stack -> count)
+	stk_idx = (stack -> start + index) % stack -> cap;
+	while (index < stack -> cnt)
 	{
-		printf("%i\n",
-			stack -> array[(stack -> start + index) % stack -> capacity]);
+		stk_idx = (stack -> start + index) % stack -> cap;
+		printf("num: %-10i	",
+			stack -> array[stk_idx].num);
+		printf("dest: %-10f\n",
+			stack -> array[stk_idx].dest);
+		index++;
+	}
+}
+
+void	stack_dest(s_stack *s_stk)
+{
+	int	index;
+	int	min;
+	int	max;
+	int	cap;
+	int	num;
+	int	stk_idx;
+
+	num = 0;
+	index = 0;
+	min = get_min(s_stk);
+	max = get_max(s_stk);
+	printf("Min: %i	Max: %i\n", min, max);
+	cap = s_stk -> cap;
+	stk_idx = (s_stk -> start + index) % cap;
+	while (index < s_stk -> cnt)
+	{
+		stk_idx = (s_stk -> start + index) % s_stk -> cap;
+		num = s_stk -> array[stk_idx].num;
+		s_stk -> array[stk_idx].dest
+			= normalize(min, max, num, cap);
 		index++;
 	}
 }
