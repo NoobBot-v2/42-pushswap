@@ -12,31 +12,8 @@
 
 #include "pushswap.h"
 
-void	check_top(s_stack *stk_a)
+//External sorting system to determine destination first
+void	dest_sort()
 {
-	if (stk_a -> cnt <= 1)
-		return ;
-	if (stk_a -> array[stk_a -> start].dest > stk_a -> array[stk_a -> start + 1].dest)
-	{
-		printf("swap top\n");
-		swap(stk_a);
-		rotate_up(stk_a);
-	}
-}
-
-int	check_order(s_stack *stk_a)
-{
-	int	index;
-	int	stk_idx;
-
-	index = 0;
-	stk_idx = (stk_a -> start + index) % stk_a -> cap;
-	while (index < stk_a -> cnt)
-	{
-		stk_idx = (stk_a -> start + index) % stk_a -> cap;
-		if (stk_a->array[stk_idx].dest > stk_a->array[(stk_idx + 1) % stk_a->cap].dest)
-			return 1;
-		index++;
-	}
-	return (0);
+	printf("Placeholder");
 }

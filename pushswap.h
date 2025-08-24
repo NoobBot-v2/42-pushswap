@@ -42,7 +42,4 @@ void	swap(s_stack *stk_a);
 int	get_min(s_stack *s_stk);
 int	get_max(s_stack *s_stk);
 double	normalize(int min, int max, int num, int cap);
-
-void	check_top(s_stack *stk_a);
-int	check_order(s_stack *stk_a);
 #endif
