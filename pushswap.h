@@ -6,7 +6,7 @@
 /*   By: jsoh <jsoh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 18:58:39 by jsoh              #+#    #+#             */
-/*   Updated: 2025/08/24 17:41:14 by jsoh             ###   ########.fr       */
+/*   Updated: 2025/08/24 19:23:17 by jsoh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,4 +42,7 @@ void	swap(s_stack *stk_a);
 int	get_min(s_stack *s_stk);
 int	get_max(s_stack *s_stk);
 double	normalize(int min, int max, int num, int cap);
+
+void	check_top(s_stack *stk_a);
+int	check_order(s_stack *stk_a);
 #endif

@@ -6,7 +6,7 @@
 /*   By: jsoh <jsoh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 18:58:27 by jsoh              #+#    #+#             */
-/*   Updated: 2025/08/24 18:23:54 by jsoh             ###   ########.fr       */
+/*   Updated: 2025/08/24 19:37:01 by jsoh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ void	stack_view(s_stack *stack)
 
 	index = 0;
 	stk_idx = (stack -> start + index) % stack -> cap;
+	printf("%i\n",stack -> cnt);
 	while (index < stack -> cnt)
 	{
 		stk_idx = (stack -> start + index) % stack -> cap;
@@ -67,21 +68,27 @@ void	stack_dest(s_stack *s_stk)
 	int	max;
 	int	cap;
 	int	num;
-	int	stk_idx;
 
 	num = 0;
 	index = 0;
 	min = get_min(s_stk);
 	max = get_max(s_stk);
-	printf("Min: %i	Max: %i\n", min, max);
+	printf("Min: %10i	Max: %i\n", min, max);
 	cap = s_stk -> cap;
-	stk_idx = (s_stk -> start + index) % cap;
 	while (index < s_stk -> cnt)
 	{
-		stk_idx = (s_stk -> start + index) % s_stk -> cap;
-		num = s_stk -> array[stk_idx].num;
-		s_stk -> array[stk_idx].dest
+		num = s_stk -> array[(s_stk -> start + index) % cap].num;
+		s_stk -> array[(s_stk -> start + index) % cap].dest
 			= normalize(min, max, num, cap);
 		index++;
 	}
+}
+
+void	stack_free(s_stack **stack)
+{
+	if (!stack || !*stack)
+		return ;
+	free((*stack)->array);
+	free(*stack);
+	*stack = NULL;
 }
