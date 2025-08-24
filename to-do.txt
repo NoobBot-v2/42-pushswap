@@ -1,0 +1,8 @@
+#To-do
+
+radix sort for destination indexes
+
+split radix sort into 2 domains if there are -ve numbers
+keep 0 in +ve domain
+
+resolve destination indexes using the radix sort
