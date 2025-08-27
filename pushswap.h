@@ -34,5 +34,4 @@ void	push(s_stack *stk_a, s_stack *stk_b);
 void	swap(s_stack *stk_a);
 int	get_min(s_stack *s_stk);
 int	get_max(s_stack *s_stk);
-double	normalize(int min, int max, int num, int cap);
 #endif

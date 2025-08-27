@@ -21,7 +21,6 @@ int main(int argc, char const *argv[])
 	stack_create(&stack_a, argc, 'a');
 	stack_create(&stack_b, argc, 'b');
 	stack_init(stack_a, argv);
-	stack_dest(stack_a);
 	printf("Swap\n");
 	swap(stack_a);
 	printf("Stack A\n");

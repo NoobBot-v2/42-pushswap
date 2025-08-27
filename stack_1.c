@@ -52,7 +52,7 @@ void	stack_view(s_stack *stack)
 	while (index < stack -> cnt)
 	{
 		stk_idx = (stack -> start + index) % stack -> cap;
-		printf("num: %-10i	",
+		printf("num: %-10i\n",
 			stack -> array[stk_idx]);
 		index++;
 	}
