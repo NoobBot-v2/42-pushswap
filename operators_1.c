@@ -16,46 +16,34 @@ void rotate_up(s_stack *stack)
 {
 	int first;
 	int i;
-	int from;
-	int to;
-	int last;
 
 	if (stack->cnt <= 1)
 		return;
-	first = stack->array[stack->start];
+	first = stack->array[0];
 	i = 0;
-	while (i < stack->cnt - 1)
+	while (i < stack -> cnt - 1)
 	{
-		from = (stack->start + i + 1) % stack->cap;
-		to   = (stack->start + i) % stack->cap;
-		stack->array[to] = stack->array[from];
+		stack->array[i] = stack->array[i + 1];
 		i++;
 	}
-	last = (stack->start + stack->cnt - 1) % stack->cap;
-	stack->array[last] = first;
+	stack->array[i] = first;
 }
 
 void rotate_down(s_stack *stack)
 {
 	int last;
 	int i;
-	int from;
-	int to;
-	int first;
 
 	if (stack->cnt <= 1)
 		return;
-	last = (stack->start + stack->cnt - 1) % stack->cap;
-	first = stack->array[last];
+	last = stack->array[stack -> cnt - 1];
 	i = stack->cnt - 1;
 	while (i > 0)
 	{
-		from = (stack->start + i - 1 + stack->cap) % stack->cap;
-		to   = (stack->start + i) % stack->cap;
-		stack->array[to] = stack->array[from];
+		stack->array[i] = stack->array[i - 1];
 		i--;
 	}
-	stack->array[stack->start] = first;
+	stack->array[i] = last;
 }
 
 void push(s_stack *stk_a, s_stack *stk_b)
@@ -64,23 +52,21 @@ void push(s_stack *stk_a, s_stack *stk_b)
 
 	if (!stk_a || !stk_b || stk_a->cnt == 0)
 		return;
-	top_a = stk_a->array[stk_a->start];
-	stk_a->start = (stk_a->start + 1) % stk_a->cap;
+	top_a = stk_a->array[0];
+	rotate_up(stk_a);
 	stk_a->cnt--;
-	stk_b->start = (stk_b->start - 1 + stk_b->cap) % stk_b->cap;
-	stk_b->array[stk_b->start] = top_a;
 	stk_b->cnt++;
+	rotate_down(stk_b);
+	stk_b->array[0] = top_a;
 }
 
 void swap(s_stack *stack)
 {
-	int next_idx;
 	int top_a;
 
 	if (!stack || stack->cnt <= 1)
 		return;
-	next_idx = (stack->start + 1) % stack->cap;
-	top_a = stack->array[stack->start];
-	stack->array[stack->start] = stack->array[next_idx];
-	stack->array[next_idx] = top_a;
+	top_a = stack->array[0];
+	stack->array[0] = stack->array[1];
+	stack->array[1] = top_a;
 }

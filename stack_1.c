@@ -24,7 +24,6 @@ void	stack_create(s_stack **stack, int size, char type)
 		(*stack)->cnt = size - 1;
 	else if (type == 'b')
 		(*stack)->cnt = 0;
-	(*stack)->start = 0;
 	(*stack)->cap = size;
 	printf("Stack created\n");
 }
@@ -44,16 +43,13 @@ void	stack_init(s_stack *stack, char const *argv[])
 void	stack_view(s_stack *stack)
 {
 	int	index;
-	int	stk_idx;
 
 	index = 0;
-	stk_idx = (stack -> start + index) % stack -> cap;
-	printf("%i\n",stack -> cnt);
+	printf("Stack View: %i\n",stack -> cnt);
 	while (index < stack -> cnt)
 	{
-		stk_idx = (stack -> start + index) % stack -> cap;
 		printf("num: %-10i\n",
-			stack -> array[stk_idx]);
+			stack -> array[index]);
 		index++;
 	}
 }

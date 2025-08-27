@@ -12,34 +12,48 @@
 
 #include "pushswap.h"
 
-int	get_max(s_stack *stack)
+int	get_max_index(s_stack *stack)
 {
 	int	index;
 	int	max_num;
+	int	max_index;
 
 	index = 0;
-	max_num = stack -> array[(stack -> start + index) % stack -> cap];
+	max_index = -1;
+	max_num = stack -> array[index];
 	while (index < stack -> cnt)
 	{
-		if (stack -> array[(stack -> start + index) % stack -> cap] >= max_num)
-			max_num = stack -> array[(stack -> start + index) % stack -> cap];
+		if (stack -> array[index] >= max_num)
+			max_index = index;
 		index++;
 	}
-	return (max_num);
+	return (max_index);
 }
 
-int	get_min(s_stack *stack)
+int	get_min_index(s_stack *stack)
 {
 	int	index;
 	int	min;
+	int	min_index;
 
 	index = 0;
-	min = stack -> array[(stack -> start + index) % stack -> cap];
+	min_index = -1;
+	min = stack -> array[index];
 	while (index < stack -> cnt)
 	{
-		if (stack -> array[(stack -> start + index) % stack -> cap] <= min)
-			min = stack -> array[(stack -> start + index) % stack -> cap];
+		if (stack -> array[index] <= min)
+			min_index = index;
 		index++;
 	}
-	return (min);
+	return (min_index);
+}
+
+int	get_max_num(s_stack *stack)
+{
+	return(stack -> array[get_max_index(stack)]);
+}
+
+int	get_min_num(s_stack *stack)
+{
+	return(stack -> array[get_min_index(stack)]);
 }
