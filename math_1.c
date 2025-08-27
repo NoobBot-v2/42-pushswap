@@ -12,46 +12,34 @@
 
 #include "pushswap.h"
 
-int	get_max(s_stack *s_stk)
+int	get_max(s_stack *stack)
 {
 	int	index;
 	int	max_num;
 
 	index = 0;
-	max_num = s_stk -> array[(s_stk -> start + index) % s_stk -> cap].num;
-	while (index < s_stk -> cnt)
+	max_num = stack -> array[(stack -> start + index) % stack -> cap];
+	while (index < stack -> cnt)
 	{
-		if (s_stk -> array[(s_stk -> start + index) % s_stk -> cap].num >= max_num)
-			max_num = s_stk -> array[(s_stk -> start + index) % s_stk -> cap].num;
+		if (stack -> array[(stack -> start + index) % stack -> cap] >= max_num)
+			max_num = stack -> array[(stack -> start + index) % stack -> cap];
 		index++;
 	}
 	return (max_num);
 }
 
-int	get_min(s_stack *s_stk)
+int	get_min(s_stack *stack)
 {
 	int	index;
 	int	min;
 
 	index = 0;
-	min = s_stk -> array[(s_stk -> start + index) % s_stk -> cap].num;
-	while (index < s_stk -> cnt)
+	min = stack -> array[(stack -> start + index) % stack -> cap];
+	while (index < stack -> cnt)
 	{
-		if (s_stk -> array[(s_stk -> start + index) % s_stk -> cap].num <= min)
-			min = s_stk -> array[(s_stk -> start + index) % s_stk -> cap].num;
+		if (stack -> array[(stack -> start + index) % stack -> cap] <= min)
+			min = stack -> array[(stack -> start + index) % stack -> cap];
 		index++;
 	}
 	return (min);
-}
-
-double	normalize(int min, int max, int num, int cap)
-{
-	double	norm_num;
-
-	if (min == max)
-		return (0.0);
-	norm_num = 0;
-	cap = cap / 1;
-	norm_num = (double)(num - min) / (max - min) * (cap - 1);
-	return (norm_num);
 }

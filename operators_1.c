@@ -14,7 +14,7 @@
 
 void rotate_up(s_stack *stack)
 {
-	s_number first;
+	int first;
 	int i;
 	int from;
 	int to;
@@ -41,7 +41,7 @@ void rotate_down(s_stack *stack)
 	int i;
 	int from;
 	int to;
-	s_number first;
+	int first;
 
 	if (stack->cnt <= 1)
 		return;
@@ -60,10 +60,11 @@ void rotate_down(s_stack *stack)
 
 void push(s_stack *stk_a, s_stack *stk_b)
 {
+	int top_a;
+
 	if (!stk_a || !stk_b || stk_a->cnt == 0)
 		return;
-
-	s_number top_a = stk_a->array[stk_a->start];
+	top_a = stk_a->array[stk_a->start];
 	stk_a->start = (stk_a->start + 1) % stk_a->cap;
 	stk_a->cnt--;
 	stk_b->start = (stk_b->start - 1 + stk_b->cap) % stk_b->cap;
@@ -71,14 +72,15 @@ void push(s_stack *stk_a, s_stack *stk_b)
 	stk_b->cnt++;
 }
 
-
-void swap(s_stack *stk_a)
+void swap(s_stack *stack)
 {
-	if (!stk_a || stk_a->cnt <= 1)
-		return;
+	int next_idx;
+	int top_a;
 
-	int next_idx = (stk_a->start + 1) % stk_a->cap;
-	s_number top_a = stk_a->array[stk_a->start];
-	stk_a->array[stk_a->start] = stk_a->array[next_idx];
-	stk_a->array[next_idx] = top_a;
+	if (!stack || stack->cnt <= 1)
+		return;
+	next_idx = (stack->start + 1) % stack->cap;
+	top_a = stack->array[stack->start];
+	stack->array[stack->start] = stack->array[next_idx];
+	stack->array[next_idx] = top_a;
 }

@@ -16,25 +16,18 @@
 #ifndef PUSHSWAP_H
 # define PUSHSWAP_H
 
-typedef struct s_number
-{
-	int num;
-	double dest;
-} s_number;
-
 typedef struct s_stack
 {
 	int start;
 	int cnt;
 	int cap;
-	s_number *array;
+	int *array;
 } s_stack;
 
 int	ft_atoi(const char *nptr);
 void	stack_create(s_stack **stack, int size, char type);
 void	stack_init(s_stack *stack, char const *argv[]);
 void	stack_view(s_stack *stack);
-void	stack_dest(s_stack *s_stk);
 void	rotate_up(s_stack *stack);
 void	rotate_down(s_stack *stack);
 void	push(s_stack *stk_a, s_stack *stk_b);
