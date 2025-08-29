@@ -12,7 +12,7 @@
 
 #include "pushswap.h"
 
-int	get_max_index(s_stack *stack)
+int	get_max_index(const s_stack *stack)
 {
 	int	index;
 	int	max_num;
@@ -24,13 +24,16 @@ int	get_max_index(s_stack *stack)
 	while (index < stack -> cnt)
 	{
 		if (stack -> array[index] >= max_num)
+		{
+			max_num = stack -> array[index];
 			max_index = index;
+		}
 		index++;
 	}
 	return (max_index);
 }
 
-int	get_min_index(s_stack *stack)
+int	get_min_index(const s_stack *stack)
 {
 	int	index;
 	int	min;
@@ -42,18 +45,21 @@ int	get_min_index(s_stack *stack)
 	while (index < stack -> cnt)
 	{
 		if (stack -> array[index] <= min)
+		{
+			min = stack -> array[index];
 			min_index = index;
+		}
 		index++;
 	}
 	return (min_index);
 }
 
-int	get_max_num(s_stack *stack)
+int	get_max_num(const s_stack *stack)
 {
 	return(stack -> array[get_max_index(stack)]);
 }
 
-int	get_min_num(s_stack *stack)
+int	get_min_num(const s_stack *stack)
 {
 	return(stack -> array[get_min_index(stack)]);
 }

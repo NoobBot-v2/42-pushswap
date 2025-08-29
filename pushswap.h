@@ -16,6 +16,23 @@
 #ifndef PUSHSWAP_H
 # define PUSHSWAP_H
 
+typedef struct s_rcost
+{
+	int ra;
+	int rb;
+	int rra;
+	int rrb;
+	int rr;
+	int rrr;
+	int total;
+} s_rcost;
+
+typedef struct s_pair
+{
+	int up;
+	int down;
+} s_pair;
+
 typedef struct s_stack
 {
 	int cnt;
@@ -23,32 +40,8 @@ typedef struct s_stack
 	int *array;
 } s_stack;
 
-typedef struct s_dist
-{
-	int up_max;
-	int down_max;
-	int up_min;
-	int down_min;
-	int up;
-	int down;
-} s_dist;
-
-typedef struct s_cost
-{
-	int pa;
-	int pb;
-	int sa;
-	int sb;
-	int ss;
-	int ra;
-	int rb;
-	int rr;
-	int rra;
-	int rrb;
-	int rrr;
-	int total;
-} s_cost;
-
+void ft_view_final_cost(s_rcost cost);
+void ft_view_pair(s_pair a);
 int	ft_atoi(const char *nptr);
 void	stack_create(s_stack **stack, int size, char type);
 void	stack_init(s_stack *stack, char const *argv[]);
@@ -57,9 +50,18 @@ void	rotate_up(s_stack *stack);
 void	rotate_down(s_stack *stack);
 void	push(s_stack *stk_a, s_stack *stk_b);
 void	swap(s_stack *stk_a);
-int	get_min_index(s_stack *s_stk);
-int	get_max_index(s_stack *s_stk);
-int	get_min_num(s_stack *stack);
-int	get_max_num(s_stack *stack);
+int	get_min_index(const s_stack *s_stk);
+int	get_max_index(const s_stack *s_stk);
+int	get_min_num(const s_stack *stack);
+int	get_max_num(const s_stack *stack);
+int get_number_index(const int num, const s_stack *stack);
 int number_dest_posn(const int num, const s_stack *dest_stk);
+s_rcost check_zero(s_pair *a, s_pair *b);
+s_rcost check_same_dir_cost(s_pair *a, s_pair *b);
+s_rcost check_opp_cost(s_pair *a, s_pair *b);
+int ft_binary_search(int num, const s_stack *stack);
+s_pair ft_rotation_cost(int num, const s_stack *stack);
+s_pair ft_unsorted_rotation_cost(int num, const s_stack *stack);
+s_pair get_up_down(const int index, const int cnt);
+s_rcost ft_final_cost(s_pair *a, s_pair *b);
 #endif

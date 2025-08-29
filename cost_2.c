@@ -1,187 +1,111 @@
-typedef struct t_rcost
-{
-    int ra;
-    int rb;
-    int rra;
-    int rrb;
-    int rr;
-    int rrr;
-    int total;
-} t_rcost;
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cost_2.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jsoh@student.42singapore.sg <jsoh@stude    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/08/29 18:26:29 by jsoh@studen       #+#    #+#             */
+/*   Updated: 2025/08/29 18:26:29 by jsoh@studen      ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-typedef struct s_stack
-{
-    int cnt;
-    int start;
-    int cap;
-    int array[20];
-} s_stack;
+#include "pushswap.h"
 
-typedef struct s_pair
+static s_rcost calculate_up_dir(int a, int b)
 {
-    int up;
-    int down;
-} s_pair;
+	s_rcost cost;
 
-//Not tested - Binary Search with wrap around
-int ft_binary_search(int num, const s_stack *stack)
-{
-    int start;
-    int end;
-    int pivot;
-    int p_pivot;
-
-    start = stack -> start;
-    end = stack -> cnt;
-    pivot = ((end - start)/2 + start);//logical mid
-    p_pivot = pivot % stack -> cap;
-    while (pivot != start)
-    {
-        if (num > stack -> array[p_pivot])
-            start = pivot;
-        else if (num < stack -> array[p_pivot])
-            end = pivot;
-        pivot = ((end - start)/2 + start);//logical mid
-        p_pivot = pivot % stack -> cap;
-    }
-    pivot++;//pivot always return 1 down because of int division rounding down
-    return(pivot);//logical index
+	cost = (s_rcost){0};
+	if (a >= b)
+	{
+		cost.rr = b;
+		cost.ra = a - b;
+		cost.total = cost.rr + cost.ra;
+	}
+	else if (b > a)
+	{
+		cost.rr = a;
+		cost.rb = b - a;
+		cost.total = cost.rr + cost.rb;
+	}
+	return (cost);
 }
 
-//logical index - call this pair function for every number in a stack
-s_pair ft_rotation_cost(int num, const s_stack *stack)
+static s_rcost calculate_down_dir(int a, int b)
 {
-    s_pair cost;
-    int up;
-    int down;
-    int dest;
+	s_rcost cost;
 
-    up = 0;
-    down = 0;
-    cost = (s_pair){0};
-    dest = ft_binary_search(num, stack);
-    cost.up = dest;
-    cost.down = stack -> cnt - dest;
-    return (cost);
-}
-//Returns a struct containing lowest rotation instruction combination
-t_rcost ft_final_cost(s_pair *a, s_pair *b)
-{
-    t_rcost cost_zero;
-    t_rcost cost_opp;
-    t_rcost cost_same_dir;
-
-    cost_zero = check_zero(a,b);
-    cost_opp = check_opp_cost(a,b);
-    cost_same_dir = check_same_dir_cost(a,b);
-    if (cost_zero.total <= cost_opp.total && cost_zero.total <= cost_same_dir.total)
-        return (cost_zero);
-    else if (cost_same_dir.total <= cost_zero.total && cost_same_dir.total <= cost_opp.total)
-        return (cost_same_dir);
-    else
-        return (cost_opp);
+	cost = (s_rcost){0};
+	if (a >= b)
+	{
+		cost.rrr = b;
+		cost.rra = a - b;
+		cost.total = cost.rrr + cost.rra;
+	}
+	else if (b > a)
+	{
+		cost.rrr = a;
+		cost.rrb = b - a;
+		cost.total = cost.rrr + cost.rrb;
+	}
+	return (cost);
 }
 
-int check_total(t_rcost cost)
+// Case 0
+s_rcost check_zero(s_pair *a, s_pair *b)
 {
-    int total;
+	s_rcost cost;
 
-    total = 0;
-    total = cost.ra + cost.rb + cost.rr;
-    total = total + cost.rra + cost.rrb + cost.rrr;
-    return (total);
-}
-//Case 0
-t_rcost check_zero(s_pair *a, s_pair *b)
-{
-    t_rcost cost;
-
-    cost = (t_rcost){0};
-    if (a -> up == 0 || a -> down == 0)
-    {
-        if (b -> up <= b -> down)
-            cost.rb = b -> up;
-        else
-            cost.rrb = b -> down;
-    }
-    else if (b -> up == 0 || b -> down == 0)
-    {
-        if (a -> up <= a -> down)
-            cost.ra = a -> up;
-        else
-            cost.rra = a -> down;
-    }
-    cost.total = check_total(cost);
-    return (cost);
+	cost = (s_rcost){0};
+	if (a->up == 0 || a->down == 0)
+	{
+		if (b->up <= b->down)
+			cost.rb = b->up;
+		else
+			cost.rrb = b->down;
+	}
+	else if (b->up == 0 || b->down == 0)
+	{
+		if (a->up <= a->down)
+			cost.ra = a->up;
+		else
+			cost.rra = a->down;
+	}
+	cost.total = cost.rb + cost.rrb + cost.ra + cost.rra;
+	return (cost);
 }
 
-t_rcost calculate_up_dir(int a, int b)
+// Case 1
+s_rcost check_same_dir_cost(s_pair *a, s_pair *b)
 {
-    t_rcost cost;
+	s_rcost cost_up;
+	s_rcost cost_down;
 
-    cost = (t_rcost){0};
-    if (a >= b)
-    {
-        cost.rr = b;
-        cost.ra = a - b;
-    }
-    else if (b > a)
-    {
-        cost.rr = a;
-        cost.rb = b - a;
-    }
-    cost.total = check_total(cost);
-    return (cost);
+	cost_up = calculate_up_dir(a->up, b->up);
+	cost_down = calculate_down_dir(a->down, b->down);
+	if (cost_up.total <= cost_down.total)
+		return (cost_up);
+	else
+		return (cost_down);
 }
-
-t_rcost calculate_down_dir(int a, int b)
+// Case 2
+s_rcost check_opp_cost(s_pair *a, s_pair *b)
 {
-    t_rcost cost;
+	s_rcost cost;
 
-    cost = (t_rcost){0};
-    if (a >= b)
-    {
-        cost.rrr = b;
-        cost.rra = a - b;
-    }
-    else if (b > a)
-    {
-        cost.rrr = a;
-        cost.rrb = b - a;
-    }
-    cost.total = check_total(cost);
-    return (cost);
-}
-//Case 1
-t_rcost check_same_dir_cost(s_pair *a, s_pair *b)
-{
-    t_rcost cost_up;
-    t_rcost cost_down;
-
-    cost_up = calculate_up_dir(a -> up, b -> up);
-    cost_down = calculate_down_dir(a -> down,b -> down);
-    if (cost_up.total <= cost_down.total)
-        return (cost_up);
-    else
-        return (cost_down);
-}
-//Case 2
-t_rcost check_opp_cost(s_pair *a, s_pair *b)
-{
-    t_rcost cost;
-
-    cost = (t_rcost){0};
-    if ((a -> up + b -> down) >= (a -> down + b -> up))
-    {
-        cost.ra = a -> up;
-        cost.rrb = b -> down;
-        cost.total = cost.ra + cost.rrb;
-    }
-    else
-    {
-        cost.rb = b -> up;
-        cost.rra = a -> down;
-        cost.total = cost.rb + cost.rra;
-    }
-    return (cost);
+	cost = (s_rcost){0};
+	if ((a->up + b->down) >= (a->down + b->up))
+	{
+		cost.ra = a->up;
+		cost.rrb = b->down;
+		cost.total = cost.ra + cost.rrb;
+	}
+	else
+	{
+		cost.rb = b->up;
+		cost.rra = a->down;
+		cost.total = cost.rb + cost.rra;
+	}
+	return (cost);
 }
