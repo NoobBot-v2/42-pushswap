@@ -13,64 +13,74 @@
 #include "pushswap.h"
 
 // pivot ++1 to match position to write into
-// returns logical index
 // only works on sorted list like stack b
-int ft_binary_search(int num, const s_stack *stack)
+int binary_search(int num, const s_stack *stk)
 {
-	int start;
-	int end;
-	int pivot;
-	int p_pivot;
+	int head;
+	int left;
+	int right;
+	int mid;
+	int val;
 
-	start = get_min_index(stack);
-	end = start + stack->cnt;
-	while (start < end)
-	{
-		pivot = (start + end) / 2;
-		p_pivot = pivot % stack->cap;
-		if (stack->array[p_pivot] < num)
-			start = pivot + 1;
+	head = get_min_index(stk);
+	left = 0;
+	right = stk->cnt;
+	while (left < right) {
+		mid = (left + right) / 2;
+		val = stk->array[(head + mid) % stk->cap];
+		if (val <= num)
+			left = mid + 1;
 		else
-			end = pivot;
+			right = mid;
 	}
-	if (start % stack -> cap == stack -> cnt)
-		return (0);
-	return start % stack->cap;
+	if (left == stk->cnt)
+		left = stk->cnt - 1;
+	return (head + left) % stk->cap;
+}
+
+int number_dest_posn(const int num, const s_stack *dest_stk)
+{
+	int i;
+
+	i = 0;
+	while (i < dest_stk -> cnt - 1)
+	{
+		if (dest_stk -> array[i] < num && num < dest_stk -> array[i + 1])
+			return(i + 1);
+		i++;
+	}
+	printf("I: %i Num: %i\n",i,num);
+	printf("I Check: %i Num: %i\n", dest_stk -> array[i++],dest_stk -> array[0]);
+	if (dest_stk -> array[i++] < num && num < dest_stk -> array[0])
+		return (i);
+	printf("Not Found\n");
+	return (-1);
 }
 
 // logical index - call this pair function for every number in a stack
 // binary search will only work on stack b
-s_pair ft_rotation_cost(int num, const s_stack *stack)
+s_pair rotation_cost(int num, const s_stack *stack)
 {
 	s_pair cost;
 	int dest;
 
 	cost = (s_pair){0};
-	dest = ft_binary_search(num, stack);
-	cost.up = dest;
-	cost.down = stack->cnt - dest;
-	return (cost);
-}
-
-s_pair ft_unsorted_rotation_cost(int num, const s_stack *stack)
-{
-	s_pair cost;
-	int dest;
-
-	cost = (s_pair){0};
-	dest = number_dest_posn(num, stack);
+	dest = binary_search(num, stack);
+	//printf("Dest: %i\n", dest);
 	cost.up = dest;
 	cost.down = stack->cnt - dest;
 	return (cost);
 }
 
 // Returns a struct containing lowest rotation instruction combination
-s_rcost ft_final_cost(s_pair *a, s_pair *b)
+s_rcost final_cost(s_pair *a, s_pair *b)
 {
 	s_rcost cost_zero;
 	s_rcost cost_opp;
 	s_rcost cost_same_dir;
 
+	//ft_view_pair(*a);
+	//ft_view_pair(*b);
 	cost_zero = check_zero(a, b);
 	cost_opp = check_opp_cost(a, b);
 	cost_same_dir = check_same_dir_cost(a, b);
@@ -82,38 +92,20 @@ s_rcost ft_final_cost(s_pair *a, s_pair *b)
 		return (cost_opp);
 }
 
-//Returns physical index - This finds the number's index
-int number_dest_posn(const int num, const s_stack *dest_stk)
-{
-	int i;
-
-	i = 0;
-	while (i < dest_stk -> cnt - 1)
-	{
-		if (dest_stk -> array[i] < num && num < dest_stk -> array[i + 1])
-			return (i + 1);
-		if (dest_stk -> array)
-		i++;
-	}
-	if (dest_stk -> array[i] < num && num < dest_stk -> array[0])
-		return (0);
-	return (-1);
-}
-
 //Make a function to handle index and return s_pair
 //Index input is a physical index
 //Return pair on physical index
-s_pair get_up_down(const int index, const int cnt)
+s_pair make_pair(const int index, const int cnt)
 {
 	s_pair a;
 
-	printf("input i:%i\n",index);
+	a = (s_pair){0};
 	a.up = index;
 	a.down = cnt - index;
 	return (a);
 }
 
-int get_number_index(const int num, const s_stack *stack)
+int get_num_index(const int num, const s_stack *stack)
 {
 	int index;
 

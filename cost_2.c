@@ -58,7 +58,7 @@ s_rcost check_zero(s_pair *a, s_pair *b)
 	s_rcost cost;
 
 	cost = (s_rcost){0};
-	if (a->up == 0 || a->down == 0)
+	if (a -> up == 0 || a -> down == 0)
 	{
 		if (b->up <= b->down)
 			cost.rb = b->up;
