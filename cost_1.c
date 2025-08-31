@@ -6,7 +6,7 @@
 /*   By: jsoh <jsoh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/29 18:50:59 by jsoh@studen       #+#    #+#             */
-/*   Updated: 2025/08/31 16:12:49 by jsoh             ###   ########.fr       */
+/*   Updated: 2025/08/31 17:58:27 by jsoh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,44 +14,39 @@
 
 // pivot ++1 to match position to write into
 // only works on sorted list like stack b
+// should return physical index
+	// 1 5
+	//list is sorted in descending order 0 -2 5 4 3 2 1
+	//start = get_max_index(stk);//min_index returns physical buffer
+	//physical index: 2 / logical index: 0
+	//end = get_min_index(stk);//max_index returns physical buffer
+	//physical index: 1 / logical index: 6
+	//physical index = (head + n) % cap for wrapping
+
 int binary_search(int num, const s_stack *stk)
 {
-    int head = get_min_index(stk); // top of stack
-    int left = 0;
-    int right = stk->cnt;
-    int mid;
-    int cur, next;
+	int start = 0;//logical
+	int end = stk -> cnt;//logical
+	int head = get_max_index(stk);
+	int pivot = (end - start)/2;//logical
+	int p_pivot = (head + pivot) % stk -> cap;//physical
 
-    if (stk->cnt == 0)
-        return 0; // empty stack, insert at 0
-
-    while (left < right) {
-        mid = (left + right) / 2;
-        cur = stk->array[(head + mid) % stk->cap];
-
-        // Handle next element carefully
-        if (mid + 1 < stk->cnt)
-            next = stk->array[(head + mid + 1) % stk->cap];
-        else
-            next = stk->array[head]; // wrap to top if at end
-
-        if (cur > num && num > next) {
-            // num fits between cur and next
-            return (head + mid + 1) % stk->cap;
-        }
-        else if (num >= cur) {
-            // go left
-            right = mid;
-        }
-        else {
-            // go right
-            left = mid + 1;
-        }
-    }
-
-    return (head + left) % stk->cap;
+	// if (num > stk -> array[0])
+	// 	return (0);
+	// if (num < stk -> array[stk -> cnt - 1])
+	// 	return (stk -> cnt - 1);
+	//need to handle case if the number is not unique before this search
+	while (pivot != start)
+	{
+		pivot = (end - start)/2;//logical
+		p_pivot = (head + pivot) % stk -> cap;//physical
+		if (num > stk -> array[p_pivot])//phyiscal
+			end = pivot;//logical
+		else if (stk -> array[p_pivot] > num)
+			start = pivot;
+	}
+	return (p_pivot);
 }
-
 
 //Is not returning the closest possible bounds to the input num
 //2 fits between 0 and 4 as well as -3 and 10

@@ -1,5 +1,5 @@
 CC = gcc
-CFLAGS = -g -Wall -Wextra -Werror -Ilibft       # include headers from libft/
+CFLAGS = -Wall -Wextra -Werror -Ilibft       # include headers from libft/
 LDFLAGS = -Llibft                             # where to find libft.a
 LDLIBS = -lft                                 # link with libft.a
 

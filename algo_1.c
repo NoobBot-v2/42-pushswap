@@ -6,7 +6,7 @@
 /*   By: jsoh <jsoh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/29 21:25:21 by jsoh@studen       #+#    #+#             */
-/*   Updated: 2025/08/31 16:07:14 by jsoh             ###   ########.fr       */
+/*   Updated: 2025/08/31 18:02:58 by jsoh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,23 +33,27 @@ int master_control(s_stack *a, s_stack *b)
 		while(i < a -> cnt)
 		{
 			num = a -> array[i];
-			//printf("\nMaster Control\n");
+			printf("\nMaster Control\n");
 			pair_a = make_pair(get_num_index(num, a), a -> cnt);
-			//printf("a:");
-			//ft_view_pair(pair_a);
+			printf("a:");
+			ft_view_pair(pair_a);
 			//printf("Binary: %i\n",binary_search(num, b));
 			pair_b = make_pair(binary_search(num, b), b -> cnt);
-			//printf("b:");
-			//ft_view_pair(pair_b);
+			printf("b:");
+			ft_view_pair(pair_b);
 			//pair_b = rotation_cost(num, b);
+			arr_cost[i] = (s_rcost){0};
 			cost = final_cost(&pair_a, &pair_b);
 			arr_cost[i] = cost;
-			//printf("num: %-10i cost: %-3i\n",num,arr_cost[i].total);
-			//printf("Master Control\n");
+			printf("num: %-10i cost: %-3i\n",num,arr_cost[i].total);
+			printf("Master Control\n");
 			i++;
 		}
+		//run_actions(cost,a,b);
 		run_actions(arr_cost[lowest_cost_index(arr_cost,a -> cnt)], a, b);
 		pa(a, b);
+		stack_view(a);
+		stack_view(b);
 	}
 	free(arr_cost);
 	return 0;
@@ -57,6 +61,7 @@ int master_control(s_stack *a, s_stack *b)
 
 void run_actions(s_rcost cost, s_stack *a, s_stack *b)
 {
+	ft_view_final_cost(cost);
 	while (0 < cost.ra)
 	{
 		ra(a);

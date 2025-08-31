@@ -1,0 +1,34 @@
+num: 97        
+num: 1000      
+num: 3         
+num: 4         
+num: -2        
+num: 96        
+num: 95        
+num: 30
+
+num: 3         
+num: -2        
+num: 1000      
+num: 97        
+num: 30        
+num: 96        
+num: 95        
+num: 4 
+------------------------------
+Stack View: 3
+num: 3         
+num: -2        
+num: 30        
+Stack View: 5
+0 num: 4         
+1 num: 1000      
+2 num: 97        
+3 num: 96        
+4 num: 95  
+
+Master Control
+a:Up:    2 Down:    1
+b:Up:    3 Down:    2
+num: 30         cost: 2  
+Master Control
