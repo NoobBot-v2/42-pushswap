@@ -6,12 +6,13 @@
 /*   By: jsoh <jsoh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 18:58:39 by jsoh              #+#    #+#             */
-/*   Updated: 2025/08/24 19:23:17 by jsoh             ###   ########.fr       */
+/*   Updated: 2025/08/31 14:44:13 by jsoh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include <stdlib.h>
+#include "libft/libft.h"
 
 #ifndef PUSHSWAP_H
 # define PUSHSWAP_H
@@ -26,6 +27,13 @@ typedef struct s_rcost
 	int rrr;
 	int total;
 } s_rcost;
+
+typedef struct s_costlog
+{
+	char *op_log;
+	int log_size;
+	int total_cost;
+} s_costlog;
 
 typedef struct s_pair
 {
@@ -50,13 +58,22 @@ void	rotate_up(s_stack *stack);
 void	rotate_down(s_stack *stack);
 void	push(s_stack *stk_a, s_stack *stk_b);
 void	swap(s_stack *stk_a);
+void ra(s_stack *a);
+void rb(s_stack *b);
+void rr(s_stack *a, s_stack *b);
+void rra(s_stack *a);
+void rrb(s_stack *b);
+void rrr(s_stack *a, s_stack *b);
+void pa(s_stack *a, s_stack *b);
 int	get_min_index(const s_stack *s_stk);
 int	get_max_index(const s_stack *s_stk);
 int	get_min_num(const s_stack *stack);
 int	get_max_num(const s_stack *stack);
 int get_num_index(const int num, const s_stack *stack);
 int cost_median(s_rcost *cost, int size);
+int lowest_cost_index(s_rcost *cost, int size);
 int number_dest_posn(const int num, const s_stack *dest_stk);
+void run_actions(s_rcost cost, s_stack *a, s_stack *b);
 s_rcost check_zero(s_pair *a, s_pair *b);
 s_rcost check_same_dir_cost(s_pair *a, s_pair *b);
 s_rcost check_opp_cost(s_pair *a, s_pair *b);

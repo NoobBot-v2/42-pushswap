@@ -6,7 +6,7 @@
 /*   By: jsoh <jsoh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 18:56:39 by jsoh              #+#    #+#             */
-/*   Updated: 2025/08/24 19:41:29 by jsoh             ###   ########.fr       */
+/*   Updated: 2025/08/31 15:57:02 by jsoh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ int main(int argc, char const *argv[])
 	stack_init(stack_a, argv);
 	push(stack_a,stack_b);
 	push(stack_a,stack_b);
-	push(stack_a,stack_b);
-	push(stack_a,stack_b);
+	stack_view(stack_a);
+	stack_view(stack_b);
 	master_control(stack_a, stack_b);
 	stack_view(stack_a);
 	stack_view(stack_b);

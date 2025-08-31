@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cost_1.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsoh@student.42singapore.sg <jsoh@stude    +#+  +:+       +#+        */
+/*   By: jsoh <jsoh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/29 18:50:59 by jsoh@studen       #+#    #+#             */
-/*   Updated: 2025/08/29 18:50:59 by jsoh@studen      ###   ########.fr       */
+/*   Updated: 2025/08/31 16:12:49 by jsoh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,28 +16,45 @@
 // only works on sorted list like stack b
 int binary_search(int num, const s_stack *stk)
 {
-	int head;
-	int left;
-	int right;
-	int mid;
-	int val;
+    int head = get_min_index(stk); // top of stack
+    int left = 0;
+    int right = stk->cnt;
+    int mid;
+    int cur, next;
 
-	head = get_min_index(stk);
-	left = 0;
-	right = stk->cnt;
-	while (left < right) {
-		mid = (left + right) / 2;
-		val = stk->array[(head + mid) % stk->cap];
-		if (val <= num)
-			left = mid + 1;
-		else
-			right = mid;
-	}
-	if (left == stk->cnt)
-		left = stk->cnt - 1;
-	return (head + left) % stk->cap;
+    if (stk->cnt == 0)
+        return 0; // empty stack, insert at 0
+
+    while (left < right) {
+        mid = (left + right) / 2;
+        cur = stk->array[(head + mid) % stk->cap];
+
+        // Handle next element carefully
+        if (mid + 1 < stk->cnt)
+            next = stk->array[(head + mid + 1) % stk->cap];
+        else
+            next = stk->array[head]; // wrap to top if at end
+
+        if (cur > num && num > next) {
+            // num fits between cur and next
+            return (head + mid + 1) % stk->cap;
+        }
+        else if (num >= cur) {
+            // go left
+            right = mid;
+        }
+        else {
+            // go right
+            left = mid + 1;
+        }
+    }
+
+    return (head + left) % stk->cap;
 }
 
+
+//Is not returning the closest possible bounds to the input num
+//2 fits between 0 and 4 as well as -3 and 10
 int number_dest_posn(const int num, const s_stack *dest_stk)
 {
 	int i;
@@ -49,8 +66,7 @@ int number_dest_posn(const int num, const s_stack *dest_stk)
 		return (get_min_index(dest_stk));
 	while (i < dest_stk -> cnt - 1)
 	{
-		if ((dest_stk -> array[i] < num && num < dest_stk -> array[i + 1]) ||
-			(dest_stk -> array[i] > num && num > dest_stk -> array[i + 1]))
+		if (dest_stk -> array[i] < num && num < dest_stk -> array[i + 1])
 			return(i + 1);
 		i++;
 	}
@@ -86,12 +102,12 @@ s_rcost final_cost(s_pair *a, s_pair *b)
 	cost_same_dir = check_same_dir_cost(a, b);
 	if (cost_same_dir.total <= cost_opp.total)
 	{
-		printf("Same dir Case: %-10i\nOpp dir Case : %-10i\n",cost_same_dir.total, cost_opp.total);
+		//printf("Same dir Case: %-10i\nother Case : %-10i\n",cost_same_dir.total, cost_opp.total);
 		return (cost_same_dir);
 	}
 	else
 	{
-		printf("Same dir Case: %-10i\nOpp dir Case : %-10i\n",cost_same_dir.total, cost_opp.total);
+		//printf("Opp dir Case : %-10i\nother Case: %-10i\n", cost_opp.total,cost_same_dir.total);
 		return (cost_opp);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: jsoh <jsoh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/24 16:56:20 by jsoh              #+#    #+#             */
-/*   Updated: 2025/08/24 18:24:46 by jsoh             ###   ########.fr       */
+/*   Updated: 2025/08/31 15:52:45 by jsoh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ int	get_max_index(const s_stack *stack)
 	int	max_index;
 
 	index = 0;
-	max_index = -1;
-	max_num = stack -> array[index];
+	max_index = 0;
+	max_num = stack -> array[max_index];
 	while (index < stack -> cnt)
 	{
 		if (stack -> array[index] >= max_num)
@@ -40,8 +40,8 @@ int	get_min_index(const s_stack *stack)
 	int	min_index;
 
 	index = 0;
-	min_index = -1;
-	min = stack -> array[index];
+	min_index = 0;
+	min = stack -> array[min_index];
 	while (index < stack -> cnt)
 	{
 		if (stack -> array[index] <= min)
