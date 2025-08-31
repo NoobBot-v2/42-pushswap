@@ -1,32 +1,32 @@
-CC = gcc
-CFLAGS = -Wall -Wextra -Werror -Ilibft       # include headers from libft/
-LDFLAGS = -Llibft                             # where to find libft.a
-LDLIBS = -lft                                 # link with libft.a
+CC      = gcc
+CFLAGS  = -Wall -Wextra -Werror
+SRC     = $(wildcard *.c)
+OBJDIR  = obj
+OBJ     = $(patsubst %.c,$(OBJDIR)/%.o,$(SRC))
+EXEC    = program
 
-SRC = $(wildcard *.c)
-OBJDIR = obj
-OBJ = $(patsubst %.c,$(OBJDIR)/%.o,$(SRC))
-EXEC = program
-
-# Default target
+# Default target: build without libft
 all: $(EXEC)
 
-# Link executable (add library here)
-$(EXEC): $(OBJ) libft/libft.a
-	$(CC) $(OBJ) -o $(EXEC) $(LDFLAGS) $(LDLIBS)
+# Target to build with libft
+with_libft: CFLAGS += -Ilibft
+with_libft: LDLIBS += -lft
+with_libft: LDFLAGS += -Llibft
+with_libft: $(EXEC)
 
-# Compile each .c into obj/.o, ensure obj/ exists first
+$(EXEC): $(OBJ)
+	$(CC) $(OBJ) -o $@ $(LDFLAGS) $(LDLIBS)
+
 $(OBJDIR)/%.o: %.c | $(OBJDIR)
 	$(CC) $(CFLAGS) -c $< -o $@
 
-# Build libft.a by calling its own Makefile
-libft/libft.a:
-	$(MAKE) -C libft
-
-# Create obj directory if it doesn't exist
 $(OBJDIR):
 	mkdir -p $(OBJDIR)
 
 clean:
 	rm -rf $(OBJDIR) $(EXEC)
-	$(MAKE) -C libft clean
+	# $(MAKE) -C libft clean   # uncomment only if using libft
+
+# Convenience target: build libft if needed
+libft/libft.a:
+	$(MAKE) -C libft

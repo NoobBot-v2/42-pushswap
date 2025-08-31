@@ -39,6 +39,8 @@ static s_rcost calculate_down_dir(int a, int b)
 	cost = (s_rcost){0};
 	if (a >= b)
 	{
+		printf("a >= b rrr case\n");
+		printf("a: %i, b: %i\n",a, b);
 		cost.rrr = b;
 		cost.rra = a - b;
 		cost.total = cost.rrr + cost.rra;
@@ -53,32 +55,6 @@ static s_rcost calculate_down_dir(int a, int b)
 }
 
 // Case 0
-// Something wrong with the logic here
-// This always returns 0
-s_rcost check_zero(s_pair *a, s_pair *b)
-{
-	s_rcost cost;
-
-	cost = (s_rcost){0};
-	if (a -> up == 0 || a -> down == 0)
-	{
-		if (b->up <= b->down)
-			cost.rb = b->up;
-		else
-			cost.rrb = b->down;
-	}
-	else if (b->up == 0 || b->down == 0)
-	{
-		if (a->up <= a->down)
-			cost.ra = a->up;
-		else
-			cost.rra = a->down;
-	}
-	cost.total = cost.rb + cost.rrb + cost.ra + cost.rra;
-	return (cost);
-}
-
-// Case 1
 s_rcost check_same_dir_cost(s_pair *a, s_pair *b)
 {
 	s_rcost cost_up;
@@ -91,7 +67,7 @@ s_rcost check_same_dir_cost(s_pair *a, s_pair *b)
 	else
 		return (cost_down);
 }
-// Case 2
+// Case 1
 s_rcost check_opp_cost(s_pair *a, s_pair *b)
 {
 	s_rcost cost;
@@ -109,5 +85,6 @@ s_rcost check_opp_cost(s_pair *a, s_pair *b)
 		cost.rra = a->down;
 		cost.total = cost.rb + cost.rra;
 	}
+	//printf("rrb:%-3i\n",cost.rrb);
 	return (cost);
 }

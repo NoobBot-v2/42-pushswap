@@ -40,7 +40,7 @@ int binary_search(int num, const s_stack *stk)
 	{
 		pivot = (end - start)/2;//logical
 		p_pivot = (head + pivot) % stk -> cap;//physical
-		if (num > stk -> array[p_pivot])//phyiscal
+		if (num > stk -> array[p_pivot])//physical
 			end = pivot;//logical
 		else if (stk -> array[p_pivot] > num)
 			start = pivot;
@@ -56,33 +56,29 @@ int number_dest_posn(const int num, const s_stack *dest_stk)
 
 	i = 0;
 	if (num > get_max_num(dest_stk))
+	{
+		if (get_max_index(dest_stk) == (dest_stk -> cnt - 1))
+			return (0);
 		return (get_max_index(dest_stk));
+	}
 	else if (num < get_min_num(dest_stk))
+	{
+		if (get_min_index(dest_stk) == (dest_stk -> cnt - 1))
+			return (0);
 		return (get_min_index(dest_stk));
-	while (i < dest_stk -> cnt - 1)
+	}
+	while (i < dest_stk -> cnt)
 	{
 		if (dest_stk -> array[i] < num && num < dest_stk -> array[i + 1])
-			return(i + 1);
+		{
+			//printf("\nNum: %-3i Exit index: %i\n",num ,i);
+			return(i);
+		}
 		i++;
 	}
 	if (dest_stk -> array[i++] < num && num < dest_stk -> array[0])
 		return (i);
 	return (-1);
-}
-
-// logical index - call this pair function for every number in a stack
-// binary search will only work on stack b
-s_pair rotation_cost(int num, const s_stack *stack)
-{
-	s_pair cost;
-	int dest;
-
-	cost = (s_pair){0};
-	dest = binary_search(num, stack);
-	//printf("Dest: %i\n", dest);
-	cost.up = dest;
-	cost.down = stack->cnt - dest;
-	return (cost);
 }
 
 // Returns a struct containing lowest rotation instruction combination
