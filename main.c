@@ -22,11 +22,11 @@ int main(int argc, char const *argv[])
 	stack_init(stack_a, argv);
 	push(stack_a,stack_b);
 	push(stack_a,stack_b);
-	stack_view(stack_a);
-	stack_view(stack_b);
+	//stack_view(stack_a);
+	//stack_view(stack_b);
 	master_control(stack_a, stack_b);
-	stack_view(stack_a);
-	stack_view(stack_b);
+	//stack_view(stack_a);
+	//stack_view(stack_b);
 	return 0;
 }
 

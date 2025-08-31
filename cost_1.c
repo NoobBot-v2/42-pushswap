@@ -23,6 +23,7 @@
 	//physical index: 1 / logical index: 6
 	//physical index = (head + n) % cap for wrapping
 
+//only works on high elements count
 int binary_search(int num, const s_stack *stk)
 {
 	int start = 0;//logical
@@ -55,29 +56,21 @@ int number_dest_posn(const int num, const s_stack *dest_stk)
 	int i;
 
 	i = 0;
-	if (num > get_max_num(dest_stk))
-	{
-		if (get_max_index(dest_stk) == (dest_stk -> cnt - 1))
-			return (0);
+	if (num > get_max_num(dest_stk) || num < get_min_num(dest_stk))
 		return (get_max_index(dest_stk));
-	}
-	else if (num < get_min_num(dest_stk))
-	{
-		if (get_min_index(dest_stk) == (dest_stk -> cnt - 1))
-			return (0);
-		return (get_min_index(dest_stk));
-	}
 	while (i < dest_stk -> cnt)
 	{
-		if (dest_stk -> array[i] < num && num < dest_stk -> array[i + 1])
+		if (dest_stk -> array[i] > num && num > dest_stk -> array[i + 1])
 		{
-			//printf("\nNum: %-3i Exit index: %i\n",num ,i);
-			return(i);
+			//printf("\nNum: %-3i Exit index: %i Cnt: %-3i\n",num ,i, dest_stk -> cnt);
+			if (i == dest_stk->cnt - 1)
+				return (0);
+			return(i + 1);
 		}
 		i++;
 	}
-	if (dest_stk -> array[i++] < num && num < dest_stk -> array[0])
-		return (i);
+	if (dest_stk -> array[i] > num && num > dest_stk -> array[0])
+		return (0);
 	return (-1);
 }
 

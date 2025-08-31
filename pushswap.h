@@ -65,6 +65,7 @@ void rra(s_stack *a);
 void rrb(s_stack *b);
 void rrr(s_stack *a, s_stack *b);
 void pa(s_stack *a, s_stack *b);
+void pb(s_stack *a, s_stack *b);
 int	get_min_index(const s_stack *s_stk);
 int	get_max_index(const s_stack *s_stk);
 int	get_min_num(const s_stack *stack);

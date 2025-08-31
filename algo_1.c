@@ -38,6 +38,7 @@ int master_control(s_stack *a, s_stack *b)
 			//printf("a:");
 			//ft_view_pair(pair_a);
 			//printf("Binary: %i\n",binary_search(num, b));
+			//printf("Dest Posn: %i\n",number_dest_posn(num, b));
 			pair_b = make_pair(number_dest_posn(num, b), b -> cnt);
 			//printf("b:");
 			//ft_view_pair(pair_b);
@@ -54,9 +55,18 @@ int master_control(s_stack *a, s_stack *b)
 		//ft_view_final_cost(arr_cost[lowest_cost_index(arr_cost,a -> cnt - 1)]);
 		run_actions(arr_cost[lowest_cost_index(arr_cost,a -> cnt - 1)], a, b);
 		pa(a, b);
-		stack_view(a);
-		stack_view(b);
+		//stack_view(a);
+		//stack_view(b);
 	}
+	while (b -> cnt > 0)
+		pb(a, b);
+	int rotate = get_min_index(a);
+	while (rotate > 0)
+	{
+		ra(a);
+		rotate--;
+	}
+	
 	free(arr_cost);
 	return 0;
 }

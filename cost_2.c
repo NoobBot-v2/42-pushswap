@@ -39,8 +39,6 @@ static s_rcost calculate_down_dir(int a, int b)
 	cost = (s_rcost){0};
 	if (a >= b)
 	{
-		printf("a >= b rrr case\n");
-		printf("a: %i, b: %i\n",a, b);
 		cost.rrr = b;
 		cost.rra = a - b;
 		cost.total = cost.rrr + cost.rra;

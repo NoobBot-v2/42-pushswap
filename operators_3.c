@@ -56,3 +56,9 @@ void pa(s_stack *a, s_stack *b)
 	push(a, b);
 	printf("pa\n");
 }
+
+void pb(s_stack *a, s_stack *b)
+{
+	push(b, a);
+	printf("pb\n");
+}
