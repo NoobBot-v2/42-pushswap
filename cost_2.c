@@ -53,6 +53,8 @@ static s_rcost calculate_down_dir(int a, int b)
 }
 
 // Case 0
+// Something wrong with the logic here
+// This always returns 0
 s_rcost check_zero(s_pair *a, s_pair *b)
 {
 	s_rcost cost;
@@ -95,7 +97,7 @@ s_rcost check_opp_cost(s_pair *a, s_pair *b)
 	s_rcost cost;
 
 	cost = (s_rcost){0};
-	if ((a->up + b->down) >= (a->down + b->up))
+	if ((a->up + b->down) <= (a->down + b->up))
 	{
 		cost.ra = a->up;
 		cost.rrb = b->down;

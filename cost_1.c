@@ -43,17 +43,19 @@ int number_dest_posn(const int num, const s_stack *dest_stk)
 	int i;
 
 	i = 0;
+	if (num > get_max_num(dest_stk))
+		return (get_max_index(dest_stk));
+	else if (num < get_min_num(dest_stk))
+		return (get_min_index(dest_stk));
 	while (i < dest_stk -> cnt - 1)
 	{
-		if (dest_stk -> array[i] < num && num < dest_stk -> array[i + 1])
+		if ((dest_stk -> array[i] < num && num < dest_stk -> array[i + 1]) ||
+			(dest_stk -> array[i] > num && num > dest_stk -> array[i + 1]))
 			return(i + 1);
 		i++;
 	}
-	printf("I: %i Num: %i\n",i,num);
-	printf("I Check: %i Num: %i\n", dest_stk -> array[i++],dest_stk -> array[0]);
 	if (dest_stk -> array[i++] < num && num < dest_stk -> array[0])
 		return (i);
-	printf("Not Found\n");
 	return (-1);
 }
 
@@ -75,26 +77,29 @@ s_pair rotation_cost(int num, const s_stack *stack)
 // Returns a struct containing lowest rotation instruction combination
 s_rcost final_cost(s_pair *a, s_pair *b)
 {
-	s_rcost cost_zero;
 	s_rcost cost_opp;
 	s_rcost cost_same_dir;
 
 	//ft_view_pair(*a);
 	//ft_view_pair(*b);
-	cost_zero = check_zero(a, b);
 	cost_opp = check_opp_cost(a, b);
 	cost_same_dir = check_same_dir_cost(a, b);
-	if (cost_zero.total <= cost_opp.total && cost_zero.total <= cost_same_dir.total)
-		return (cost_zero);
-	else if (cost_same_dir.total <= cost_zero.total && cost_same_dir.total <= cost_opp.total)
+	if (cost_same_dir.total <= cost_opp.total)
+	{
+		printf("Same dir Case: %-10i\nOpp dir Case : %-10i\n",cost_same_dir.total, cost_opp.total);
 		return (cost_same_dir);
+	}
 	else
+	{
+		printf("Same dir Case: %-10i\nOpp dir Case : %-10i\n",cost_same_dir.total, cost_opp.total);
 		return (cost_opp);
+	}
 }
 
 //Make a function to handle index and return s_pair
 //Index input is a physical index
 //Return pair on physical index
+//a.down is always at least 1 even at last index, it requires 1 rr to move the correct index to 1st posn
 s_pair make_pair(const int index, const int cnt)
 {
 	s_pair a;
@@ -102,6 +107,8 @@ s_pair make_pair(const int index, const int cnt)
 	a = (s_pair){0};
 	a.up = index;
 	a.down = cnt - index;
+	if (a.down == 0)
+		a.down = 1;
 	return (a);
 }
 

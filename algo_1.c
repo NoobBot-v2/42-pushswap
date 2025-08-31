@@ -30,14 +30,18 @@ int master_control(s_stack *a, s_stack *b)
 	while(i < a -> cnt)
 	{
 		num = a -> array[i];
-		printf("Num: %i\n",num);
+		printf("\nMaster Control\n");
 		pair_a = make_pair(get_num_index(num, a), a -> cnt);
-		//pair_b is missing 1 case where incoming number is new max or new min
+		printf("a:");
+		ft_view_pair(pair_a);
 		pair_b = make_pair(number_dest_posn(num, b), b -> cnt);
+		printf("b:");
+		ft_view_pair(pair_b);
 		//pair_b = rotation_cost(num, b);
 		cost = final_cost(&pair_a, &pair_b);
 		arr_cost[i] = cost;
-		printf("cost: %3i\n",arr_cost[i].total);
+		printf("num: %-10i cost: %-3i\n",num,arr_cost[i].total);
+		printf("Master Control\n");
 		i++;
 	}
 	free(arr_cost);
