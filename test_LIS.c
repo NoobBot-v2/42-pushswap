@@ -15,7 +15,7 @@ int LIS(int *s, int size, int offset)
     //size = 10 - 2 = 8
     //i = 7
     printf("--------------------\n");
-    while (i < size - 2)
+    while (i < size)
     {
         if (last_max < s[i])
         {
@@ -35,11 +35,11 @@ void find_unsorted_subsequence(int *s, int lis_idx, int size)
 {
     int start = -1;
     int end = -1;
-    int i = 0;
-    
-    while(i < size - 2)
+    int i = 1;
+
+    while(i < size - 1)
     {
-        if (start == -1 && (s[i] > s[i + 1]))
+        if (start == -1 && (s[i] < s[i - 1]))
             start = i;
         else if (start != -1 && end == -1 && (s[i] < s[i+1]))
             end = i;
@@ -51,11 +51,14 @@ void find_unsorted_subsequence(int *s, int lis_idx, int size)
 int main()
 {
 
-    int test[20] = { -20, 0, 1, 5, 10,
-                    28, -30, 6,
-                    8, -100, -3, 43, 42,
-                    1230, -432, 321, -1, 12, -2 ,4};
-    int size = 20;
+    // int test[20] = { -20, 0, 1, 5, 10,
+    //                 28, -30, 6,
+    //                 8, -100, -3, 43, 42,
+    //                 1230, -432, 321, -1, 12, -2 ,4};
+    int test[20] = {-432,321
+                    ,-1,12,-2,4,-20
+                    ,0,1,5,10,28,42,43,1230};
+    int size = 15;
     int i = 0;
     int length = 1;
     int longest_len = 1;
