@@ -6,7 +6,7 @@
 /*   By: jsoh <jsoh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 19:12:28 by jsoh              #+#    #+#             */
-/*   Updated: 2025/08/24 19:41:09 by jsoh             ###   ########.fr       */
+/*   Updated: 2025/09/05 20:25:46 by jsoh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,4 +69,5 @@ void swap(s_stack *stack)
 	top_a = stack->array[0];
 	stack->array[0] = stack->array[1];
 	stack->array[1] = top_a;
+	printf("swap\n");
 }

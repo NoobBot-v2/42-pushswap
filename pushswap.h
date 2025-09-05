@@ -6,7 +6,7 @@
 /*   By: jsoh <jsoh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 18:58:39 by jsoh              #+#    #+#             */
-/*   Updated: 2025/08/31 14:44:13 by jsoh             ###   ########.fr       */
+/*   Updated: 2025/09/05 20:23:51 by jsoh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,18 @@ typedef struct s_pair
 	int down;
 } s_pair;
 
+typedef struct s_num
+{
+	int val;
+	int order;
+} s_num;
+
 typedef struct s_stack
 {
 	int cnt;
 	int cap;
 	int *array;
+	s_num *test_array;
 } s_stack;
 
 void ft_view_final_cost(s_rcost cost);
@@ -83,4 +90,8 @@ s_pair rotation_cost(int num, const s_stack *stack);
 s_pair make_pair(const int index, const int cnt);
 s_rcost final_cost(s_pair *a, s_pair *b);
 int master_control(s_stack *a, s_stack *b);
+
+int LIS_loop(s_stack *s);
+void LIS_assign(s_stack *s, int start);
+void LIS_bounds(s_stack *s);
 #endif

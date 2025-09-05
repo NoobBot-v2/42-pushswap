@@ -6,26 +6,30 @@
 /*   By: jsoh <jsoh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 18:56:39 by jsoh              #+#    #+#             */
-/*   Updated: 2025/08/31 15:57:02 by jsoh             ###   ########.fr       */
+/*   Updated: 2025/09/05 21:36:45 by jsoh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+//./program $(shuf -i 1-50 -n 20)
 #include "pushswap.h"
 
 int main(int argc, char const *argv[])
 {
 	s_stack *stack_a;
-	s_stack *stack_b;
+	//s_stack *stack_b;
 
 	stack_create(&stack_a, argc, 'a');
-	stack_create(&stack_b, argc, 'b');
+	//stack_create(&stack_b, argc, 'b');
 	stack_init(stack_a, argv);
-	push(stack_a,stack_b);
-	push(stack_a,stack_b);
+	LIS_loop(stack_a);
+	//push(stack_a,stack_b);
+	//push(stack_a,stack_b);
 	//stack_view(stack_a);
 	//stack_view(stack_b);
-	master_control(stack_a, stack_b);
-	//stack_view(stack_a);
+	//master_control(stack_a, stack_b);
+	LIS_assign(stack_a, LIS_loop(stack_a));
+	LIS_bounds(stack_a);
+	stack_view(stack_a);
 	//stack_view(stack_b);
 	return 0;
 }

@@ -6,7 +6,7 @@
 /*   By: jsoh <jsoh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 18:58:27 by jsoh              #+#    #+#             */
-/*   Updated: 2025/08/24 19:37:01 by jsoh             ###   ########.fr       */
+/*   Updated: 2025/09/05 21:35:42 by jsoh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,15 @@ void	stack_create(s_stack **stack, int size, char type)
 	(*stack)->array = (int *)malloc(size * sizeof(int));
 	if (!(*stack)->array)
 		return ;
+	(*stack)->test_array = (s_num *)malloc(size * sizeof(s_num));
+	if (!(*stack)->test_array)
+		return ;
 	if (type == 'a')
 		(*stack)->cnt = size - 1;
 	else if (type == 'b')
 		(*stack)->cnt = 0;
 	(*stack)->cap = size;
-	printf("Stack created\n");
+	//printf("Stack created\n");
 }
 
 void	stack_init(s_stack *stack, char const *argv[])
@@ -38,6 +41,12 @@ void	stack_init(s_stack *stack, char const *argv[])
 		stack -> array[index] = ft_atoi(argv[index + 1]);
 		index++;
 	}
+	index = 0;
+	while (index < stack -> cnt)
+	{
+		stack -> test_array[index] = (s_num){0};
+		index++;
+	}
 }
 
 void	stack_view(s_stack *stack)
@@ -48,8 +57,7 @@ void	stack_view(s_stack *stack)
 	printf("Stack View: %i\n",stack -> cnt);
 	while (index < stack -> cnt)
 	{
-		printf("num: %-10i\n",
-			stack -> array[index]);
+		printf("num: %-6i order: %-6i\n",stack -> test_array[index].val, stack -> test_array[index].order);
 		index++;
 	}
 }
