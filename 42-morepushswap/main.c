@@ -12,7 +12,7 @@
 
 #include "more_pushswap.h"
 
-//./program $(shuf -i 1-50 -n 20)
+//./pushswap $(seq -100 100 | shuf | head -n 20)
 int main(int argc, char const *argv[])
 {
 	s_stack *stack_a;
