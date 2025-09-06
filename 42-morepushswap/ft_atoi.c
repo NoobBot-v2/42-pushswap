@@ -6,11 +6,11 @@
 /*   By: jsoh <jsoh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/11 14:54:22 by jsoh              #+#    #+#             */
-/*   Updated: 2025/09/06 17:37:58 by jsoh             ###   ########.fr       */
+/*   Updated: 2025/09/06 17:38:46 by jsoh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pushswap.h"
+#include "more_pushswap.h"
 
 static int	ft_isspace(int c)
 {

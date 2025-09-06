@@ -6,7 +6,7 @@
 /*   By: jsoh <jsoh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 18:58:39 by jsoh              #+#    #+#             */
-/*   Updated: 2025/09/05 20:23:51 by jsoh             ###   ########.fr       */
+/*   Updated: 2025/09/06 19:23:24 by jsoh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ typedef struct s_pair
 typedef struct s_num
 {
 	int val;
-	int order;
+	int index;
 } s_num;
 
 typedef struct s_stack
