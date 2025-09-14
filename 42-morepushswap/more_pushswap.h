@@ -6,7 +6,7 @@
 /*   By: jsoh <jsoh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/06 17:30:38 by jsoh              #+#    #+#             */
-/*   Updated: 2025/09/06 19:23:20 by jsoh             ###   ########.fr       */
+/*   Updated: 2025/09/14 16:30:26 by jsoh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,5 +39,8 @@ void	stack_create(s_stack **stack, int size, char type);
 void	stack_free(s_stack **stack);
 void	stack_init(s_stack *stack, char const *argv[]);
 void	stack_view(s_stack *stack);
+
+void	create_array(int **lis_arr, int size);
+void	lis_controller(s_stack *s, int **lis_arr);
 
 #endif
