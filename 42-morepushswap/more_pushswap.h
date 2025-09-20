@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   more_pushswap.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsoh <jsoh@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: noobdevbot2 <noobdevbot2@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/06 17:30:38 by jsoh              #+#    #+#             */
-/*   Updated: 2025/09/14 16:30:26 by jsoh             ###   ########.fr       */
+/*   Updated: 2025/09/20 01:56:39 by noobdevbot2      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,5 @@ void	stack_free(s_stack **stack);
 void	stack_init(s_stack *stack, char const *argv[]);
 void	stack_view(s_stack *stack);
 
-void	create_array(int **lis_arr, int size);
-void	lis_controller(s_stack *s, int **lis_arr);
-
+int	*lis_controller(s_stack *s);
 #endif

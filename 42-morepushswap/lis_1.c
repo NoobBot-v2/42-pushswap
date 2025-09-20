@@ -12,92 +12,84 @@
 
 #include "more_pushswap.h"
 
-void	create_array(int **arr, int size)
+static void	init_lis_array(int **lis, int **tmp, int size)
 {
-	*arr = (int *)malloc(size * sizeof(int));
-	if (!*arr)
-		*arr = NULL;
+	if (size <= 0)
+	{
+		(*lis) = NULL;
+		(*tmp) = NULL;
+		return ;
+	}
+	(*lis) = (int *)malloc(size * sizeof(int));
+	if (!(*lis))
+		return ;
+	(*tmp) = (int *)malloc(size * sizeof(int));
+	if (!(*tmp))
+		return ;
 }
 
-static int lis(s_stack *s, int offset)
+static void	copy_array(int **lis, int **tmp, int len)
 {
 	int	i;
-	int	len;
-	int	lis_len;
-	int	last_num;
 
-	lis_len = 1;
-	i = 0 + offset;
-	last_num = s -> array[i].index;
-	printf("------\n");
-	while (i < s -> cnt - 1 && lis_len < (s -> cnt) / 2)
+	i = 0;
+	while (i < len)
 	{
-		if (last_num < s -> array[i].index)
-		{
-			printf("%i\n",last_num);
-			last_num = s -> array[i].index;
-			lis_len++;
-		}
+		(*lis)[i] = (*tmp)[i];
 		i++;
 	}
-	printf("%i\n",last_num);
-	printf("------\n");
 }
 
-static void init_lis(s_stack *s, int **lis_arr, int offset)
+//Returns the len of the lis
+static int	ft_lis(int **tmp, int offset, s_stack *s)
 {
 	int	i;
 	int	j;
 	int	last_num;
 
+	if (!*tmp)
+		return (0);
 	j = 0;
 	i = 0 + offset;
 	last_num = s -> array[i].index;
-	while (i < s -> cnt - 1)
+	(*tmp)[j++] = last_num;
+	printf("ft_lis\n");
+	while (i < s -> cnt)
 	{
-		if (last_num < s -> array[i].index)
+		if (s -> array[i].index > last_num)
 		{
-			(*lis_arr)[j] = s -> array[i].index;
-			j++;
 			last_num = s -> array[i].index;
+			printf("%i\n", last_num);
+			(*tmp)[j] = last_num;
+			j++;
 		}
 		i++;
 	}
+	return (j);
 }
-// Create a lis array to store the sequence, loop through the stack to create this sequence
-// Malloc only once
-void	lis_controller(s_stack *s, int **lis_arr)
+
+int	*lis_controller(s_stack *s)
 {
+	int	*lis;
+	int	*tmp;
 	int	i;
+	int	len;
 	int	longest_len;
-	int	lis_len;
-	int	lis_start;
 
 	i = 0;
-	lis_len = lis(s ,i);
-	longest_len = lis_len;
-	lis_start = 0;
-	while (i < s -> cnt - 1 && longest_len < ((s -> cnt - 1)/2))
+	len = 0;
+	longest_len = 0;
+	init_lis_array(&lis, &tmp, s -> cap);
+	while (i < s -> cnt)
 	{
-		lis_len = lis(s ,i);
-		if (longest_len < lis_len)
+		len = ft_lis(&tmp, i, s);
+		if(len > longest_len)
 		{
-			longest_len = lis_len;
-			lis_start = i;
+			copy_array(&lis, &tmp, len);
+			longest_len = len;
 		}
 		i++;
 	}
-	//This lis_start is wrong
-	init_lis(s, lis_arr, lis_start);
-	//debug
-	i = 0;
-	printf("Longest len:%i\n",longest_len);
-	while (i < longest_len)
-	{
-		printf("lis:%i\n",(*lis_arr)[i]);
-		i++;
-	}
+	free(tmp);
+	return (lis);
 }
-
-
-
