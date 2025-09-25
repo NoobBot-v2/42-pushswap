@@ -6,7 +6,7 @@
 /*   By: noobdevbot2 <noobdevbot2@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/06 17:30:38 by jsoh              #+#    #+#             */
-/*   Updated: 2025/09/20 01:56:39 by noobdevbot2      ###   ########.fr       */
+/*   Updated: 2025/09/25 11:39:19 by noobdevbot2      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,12 @@ typedef struct s_num
 	int val;
 	int index;
 } s_num;
+
+typedef struct s_arr
+{
+	int *array;
+	int n;
+} s_arr;
 
 typedef struct s_stack
 {
@@ -40,5 +46,5 @@ void	stack_free(s_stack **stack);
 void	stack_init(s_stack *stack, char const *argv[]);
 void	stack_view(s_stack *stack);
 
-int	*lis_controller(s_stack *s);
+void	lis_controller(s_stack *s, s_arr *lis);
 #endif
