@@ -6,7 +6,7 @@
 /*   By: noobdevbot2 <noobdevbot2@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/06 17:30:38 by jsoh              #+#    #+#             */
-/*   Updated: 2025/09/25 11:39:19 by noobdevbot2      ###   ########.fr       */
+/*   Updated: 2025/09/25 15:33:33 by noobdevbot2      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,4 +47,10 @@ void	stack_init(s_stack *stack, char const *argv[]);
 void	stack_view(s_stack *stack);
 
 void	lis_controller(s_stack *s, s_arr *lis);
+void	algo_controller(s_stack *a, s_stack *b, s_arr *lis);
+
+void	rotate_up(s_stack *stack);
+void	rotate_down(s_stack *stack);
+void	push(s_stack *stk_a, s_stack *stk_b);
+void	swap(s_stack *stack);
 #endif

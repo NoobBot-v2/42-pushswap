@@ -6,7 +6,7 @@
 /*   By: noobdevbot2 <noobdevbot2@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/25 08:58:23 by noobdevbot2       #+#    #+#             */
-/*   Updated: 2025/09/25 12:05:54 by noobdevbot2      ###   ########.fr       */
+/*   Updated: 2025/09/25 15:56:29 by noobdevbot2      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,14 @@ static void	ft_tails(s_stack *s, s_arr *tails, s_arr *prev)
 	}
 }
 
+static void	ft_free_arr(s_arr *arr)
+{
+	if (!arr)
+		return ;
+	free(arr -> array);
+	free(arr);
+}
+
 void	lis_controller(s_stack *s, s_arr *lis)
 {
 	s_arr *tails;
@@ -82,12 +90,21 @@ void	lis_controller(s_stack *s, s_arr *lis)
 	prev = malloc(s -> cap * sizeof(s_arr));
 	if (!tails || !prev)
 		return ;
-	tails -> n = 0;
 	tails -> array = malloc(s -> cap * sizeof(int));
 	prev -> array = malloc(s -> cap * sizeof(int));
+	if (!tails -> array || !prev -> array)
+		return ;
+	tails -> n = 0;
 	prev -> n = s -> cap;
 	while (i < prev -> n)
 		prev -> array[i++] = -1;
 	ft_tails(s, tails, prev);
 	ft_construct_lis(s, tails, prev, lis);
+	printf("Tail Len: %i\n",tails -> n);
+	for(int j = 0; j < tails -> n;j++)
+	{
+		printf("LIS: %3i\n",s -> array[tails -> array[j]].index);
+	}
+	ft_free_arr(prev);
+	ft_free_arr(tails);
 }
