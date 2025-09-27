@@ -6,7 +6,7 @@
 /*   By: noobdevbot2 <noobdevbot2@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/25 08:58:23 by noobdevbot2       #+#    #+#             */
-/*   Updated: 2025/09/25 15:56:29 by noobdevbot2      ###   ########.fr       */
+/*   Updated: 2025/09/26 16:22:23 by noobdevbot2      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ void	lis_controller(s_stack *s, s_arr *lis)
 	printf("Tail Len: %i\n",tails -> n);
 	for(int j = 0; j < tails -> n;j++)
 	{
-		printf("LIS: %3i\n",s -> array[tails -> array[j]].index);
+		printf("LIS Val:%3i\n",s -> array[tails -> array[j]].index);
 	}
 	ft_free_arr(prev);
 	ft_free_arr(tails);

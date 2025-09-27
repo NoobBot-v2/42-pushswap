@@ -6,7 +6,7 @@
 /*   By: noobdevbot2 <noobdevbot2@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/06 17:51:00 by jsoh              #+#    #+#             */
-/*   Updated: 2025/09/25 15:51:19 by noobdevbot2      ###   ########.fr       */
+/*   Updated: 2025/09/26 16:21:27 by noobdevbot2      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ int main(int argc, char const *argv[])
 	lis -> array = malloc(stack_a -> cap * sizeof(int));
 	for (int i = 0; i < argc; i++)
 		lis -> array[i] = 0;
+	stack_view(stack_a);
 	lis_controller(stack_a,lis);
 	algo_controller(stack_a, stack_b, lis);
 	stack_view(stack_a);
