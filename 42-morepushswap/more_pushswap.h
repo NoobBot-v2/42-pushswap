@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   more_pushswap.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noobdevbot2 <noobdevbot2@student.42.fr>    +#+  +:+       +#+        */
+/*   By: jsoh <jsoh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/06 17:30:38 by jsoh              #+#    #+#             */
-/*   Updated: 2025/09/25 15:33:33 by noobdevbot2      ###   ########.fr       */
+/*   Updated: 2025/09/28 21:10:23 by jsoh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,12 @@ void	stack_init(s_stack *stack, char const *argv[]);
 void	stack_view(s_stack *stack);
 
 void	lis_controller(s_stack *s, s_arr *lis);
-void	algo_controller(s_stack *a, s_stack *b, s_arr *lis);
+void	algo_controller_1(s_stack *a, s_stack *b, s_arr *lis);
+void algo_controller_2(s_stack *a, s_stack *b, s_arr *lis);
+//void	algo_controller_2(s_stack *a, s_stack *b, s_arr *lis);
+//void find_next_gap(s_stack *s, s_arr *lis);
+
+int	get_min_index(const s_stack *s);
 
 void	rotate_up(s_stack *stack);
 void	rotate_down(s_stack *stack);
