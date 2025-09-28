@@ -6,7 +6,7 @@
 /*   By: jsoh <jsoh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/25 15:19:54 by noobdevbot2       #+#    #+#             */
-/*   Updated: 2025/09/28 20:17:44 by jsoh             ###   ########.fr       */
+/*   Updated: 2025/09/28 21:15:25 by jsoh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ static int check_b_stack(s_stack *s, int last, int next)
 		while (i < s -> cnt)
 		{
 			//has to be bigger than both last and first
-			if (last < s -> array[i].index || s -> array[i].index > next)
+			if (last < s -> array[i].index && s -> array[i].index > next)
 				return (i);
 			i++;
 		}

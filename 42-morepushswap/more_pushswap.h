@@ -6,7 +6,7 @@
 /*   By: jsoh <jsoh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/06 17:30:38 by jsoh              #+#    #+#             */
-/*   Updated: 2025/09/28 21:10:23 by jsoh             ###   ########.fr       */
+/*   Updated: 2025/09/28 22:02:21 by jsoh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,17 @@ typedef struct s_arr
 	int n;
 } s_arr;
 
+typedef struct s_rcost
+{
+	int ra;
+	int rra;
+	int rb;
+	int rrb;
+	int rr;
+	int rrr;
+	int total;
+} s_rcost;
+
 typedef struct s_stack
 {
 	int cnt;
@@ -48,7 +59,7 @@ void	stack_view(s_stack *stack);
 
 void	lis_controller(s_stack *s, s_arr *lis);
 void	algo_controller_1(s_stack *a, s_stack *b, s_arr *lis);
-void algo_controller_2(s_stack *a, s_stack *b, s_arr *lis);
+void algo_controller_2(s_stack *a, s_stack *b, s_arr *lis, int *grand_total);
 //void	algo_controller_2(s_stack *a, s_stack *b, s_arr *lis);
 //void find_next_gap(s_stack *s, s_arr *lis);
 
