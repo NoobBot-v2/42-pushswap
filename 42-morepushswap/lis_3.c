@@ -3,17 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   lis_3.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsoh <jsoh@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: noobdevbot2 <noobdevbot2@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/25 08:58:23 by noobdevbot2       #+#    #+#             */
-/*   Updated: 2025/09/28 22:08:02 by jsoh             ###   ########.fr       */
+/*   Updated: 2025/10/03 16:11:22 by noobdevbot2      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "more_pushswap.h"
 
-//Searches based on value retrieved by indexes stored by tails
-//Returns index posn of value in tails
 static int ft_binary_search(int *tails_arr, int value, int n, s_stack *s)
 {
 	int	start;
@@ -33,7 +31,6 @@ static int ft_binary_search(int *tails_arr, int value, int n, s_stack *s)
 	return (start);
 }
 
-//Reconstruct LIS from prev
 static void	ft_construct_lis(s_stack *s, s_arr *tails, s_arr *prev, s_arr *LIS)
 {
 	int	prev_num;
@@ -49,9 +46,6 @@ static void	ft_construct_lis(s_stack *s, s_arr *tails, s_arr *prev, s_arr *LIS)
 	}
 }
 
-//Take s_stack -> array.index
-//Refactor tails and prev later on
-//*prev is intialized with -1
 static void	ft_tails(s_stack *s, s_arr *tails, s_arr *prev)
 {
 	int	i;
@@ -69,6 +63,42 @@ static void	ft_tails(s_stack *s, s_arr *tails, s_arr *prev)
 			tails -> n++;
 		i++;
 	}
+}
+
+static int	ft_find_head_idx(s_stack *s, s_arr *lis)
+{
+	int i;
+	int j;
+
+	i = 0;
+	j = 0;
+	while (i < s -> cap)
+	{
+		if (lis -> array[i] == 1)
+			break ;
+		i++;
+	}
+	while (j < s -> cap)
+	{
+		if (s -> array[j].index == i)
+			break;
+		j++;
+	}
+	return (j);
+}
+
+static int	ft_find_end_value(int cap, s_arr *lis)
+{
+	int i;
+
+	i = cap;
+	while (0 < i)
+	{
+		if (lis -> array[i] == 1)
+			break ;
+		i--;
+	}
+	return (i);
 }
 
 static void	ft_free_arr(s_arr *arr)
@@ -100,11 +130,11 @@ void	lis_controller(s_stack *s, s_arr *lis)
 		prev -> array[i++] = -1;
 	ft_tails(s, tails, prev);
 	ft_construct_lis(s, tails, prev, lis);
+	//for (int k = 0; k < s -> cap ; k++)
+	//	printf("%i\n",lis -> array[k]);
 	printf("Tail Len: %i\n",tails -> n);
-/* 	for(int j = 0; j < tails -> n;j++)
-	{
-		printf("LIS Val:%3i\n",s -> array[tails -> array[j]].index);
-	} */
+	printf("Head idx: %i\n",ft_find_head_idx(s, lis));
+	printf("End value: %i\n",ft_find_end_value(s -> cap, lis));
 	ft_free_arr(prev);
 	ft_free_arr(tails);
 }
