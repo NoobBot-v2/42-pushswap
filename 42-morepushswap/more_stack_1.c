@@ -6,7 +6,7 @@
 /*   By: jsoh <jsoh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 18:58:27 by jsoh              #+#    #+#             */
-/*   Updated: 2025/09/06 19:35:22 by jsoh             ###   ########.fr       */
+/*   Updated: 2025/10/04 12:16:25 by jsoh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	stack_view(s_stack *s)
 	printf("Stack View: %i\n",s -> cnt);
 	while (index < s -> cnt)
 	{
-		printf("num: %-6i idx: %-6i\n",s -> array[index].val, s -> array[index].index);
+		printf("p_idx: %-5i num: %-5i idx: %-5i\n",index ,s -> array[index].val, s -> array[index].index);
 		index++;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: jsoh <jsoh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/06 17:30:38 by jsoh              #+#    #+#             */
-/*   Updated: 2025/09/28 22:02:21 by jsoh             ###   ########.fr       */
+/*   Updated: 2025/10/04 13:27:49 by jsoh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,12 +58,23 @@ void	stack_init(s_stack *stack, char const *argv[]);
 void	stack_view(s_stack *stack);
 
 void	lis_controller(s_stack *s, s_arr *lis);
-void	algo_controller_1(s_stack *a, s_stack *b, s_arr *lis);
-void algo_controller_2(s_stack *a, s_stack *b, s_arr *lis, int *grand_total);
+
+int		ft_lis_head_idx(s_stack *s, s_arr *lis);
+int		ft_lis_end_idx(s_stack *s, s_arr *lis);
+void	ft_construct_lis(s_stack *s, s_arr *tails, s_arr *prev, s_arr *LIS);
+int		ft_binary_search(int *tails, int value, int n, s_stack *s);
+void	ft_tails(s_stack *s, s_arr *tails, s_arr *prev);
+
+void	algo_controller_1(s_stack *a, s_stack *b, s_arr *lis, int *grand_total);
+void	algo_controller_2(s_stack *a, s_stack *b, s_arr *lis, int *grand_total);
+void	algo_1(s_stack *a, s_stack *b, s_arr *lis);
 //void	algo_controller_2(s_stack *a, s_stack *b, s_arr *lis);
 //void find_next_gap(s_stack *s, s_arr *lis);
 
-int	get_min_index(const s_stack *s);
+int		get_min_index(const s_stack *s);
+
+void	ft_init_arr(s_arr **arr, int n);
+void	ft_free_arr(s_arr **arr);
 
 void	rotate_up(s_stack *stack);
 void	rotate_down(s_stack *stack);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   operators_1.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noobdevbot2 <noobdevbot2@student.42.fr>    +#+  +:+       +#+        */
+/*   By: jsoh <jsoh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/25 15:26:27 by noobdevbot2       #+#    #+#             */
-/*   Updated: 2025/09/25 15:37:10 by noobdevbot2      ###   ########.fr       */
+/*   Updated: 2025/10/04 15:34:19 by jsoh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,5 +69,4 @@ void	swap(s_stack *stack)
 	top_a = stack->array[0];
 	stack->array[0] = stack->array[1];
 	stack->array[1] = top_a;
-	printf("swap\n");
 }

@@ -6,7 +6,7 @@
 /*   By: jsoh <jsoh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/25 15:19:54 by noobdevbot2       #+#    #+#             */
-/*   Updated: 2025/09/28 21:15:25 by jsoh             ###   ########.fr       */
+/*   Updated: 2025/10/04 13:00:36 by jsoh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ static int check_b_stack(s_stack *s, int last, int next)
 }
 
 //Takes in the s_stack and lis
-void	algo_controller_1(s_stack *a, s_stack *b, s_arr *lis)
+void	algo_controller_1(s_stack *a, s_stack *b, s_arr *lis, int *grand_total)
 {
 	int	i;
 	int	dist_lis;
@@ -134,6 +134,7 @@ void	algo_controller_1(s_stack *a, s_stack *b, s_arr *lis)
 				while (b_down)
 				{
 					//printf("rrb\n");
+					(*grand_total)++;
 					rotate_down(b);
 					b_down--;
 				}
@@ -144,12 +145,14 @@ void	algo_controller_1(s_stack *a, s_stack *b, s_arr *lis)
 				while (b_up > 0)
 				{
 					//printf("rb\n");
+					(*grand_total)++;
 					rotate_up(b);
 					b_up--;
 				}
 			}
 			//printf("b-fits pushing\n");
 			//printf("pb\n");
+			(*grand_total)++;
 			push(b, a);
 			//printf("ra\n");
 			//rotate_up(a);
@@ -161,6 +164,7 @@ void	algo_controller_1(s_stack *a, s_stack *b, s_arr *lis)
 		if (lis -> array[a -> array[0].index] == 0)
 		{
 			//printf("pa\n");
+			(*grand_total)++;
 			push(a, b);
 		}
 		else
@@ -168,6 +172,7 @@ void	algo_controller_1(s_stack *a, s_stack *b, s_arr *lis)
 			//prev LIS flag has been reached, find the next LIS flag starting from prev LIS flag
 			lis_val_1 = a -> array[0].index;
 			//printf("ra\n");
+			(*grand_total)++;
 			rotate_up(a);
 			i++;
 		}

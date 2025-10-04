@@ -3,7 +3,7 @@ CC = gcc
 CFLAGS = 
 
 # Source files
-SRC = math_1.c more_stack_1.c radix_sort.c dest_idx.c lis_3.c main.c algo_1.c algo_3.c operators_1.c
+SRC = math_1.c more_stack_1.c radix_sort.c dest_idx.c lis_3.c main.c algo_1.c algo_3.c operators_1.c helper_1.c lis_helper.c algo_1_rebuild.c
 OBJ = $(SRC:.c=.o)
 
 # Executable name
