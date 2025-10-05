@@ -6,7 +6,7 @@
 /*   By: jsoh <jsoh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/05 13:55:03 by jsoh              #+#    #+#             */
-/*   Updated: 2025/10/05 16:43:32 by jsoh             ###   ########.fr       */
+/*   Updated: 2025/10/05 17:03:49 by jsoh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,7 +145,6 @@ void	algo_2(s_stack *a, s_stack *b, s_arr *lis, int *grand_total)
 	int	i;
 	int	dest_posn;
 	s_rcost cost;
-
 	while (b->cnt > 0)
 	{
 		int best_idx = 0;
