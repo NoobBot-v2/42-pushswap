@@ -6,7 +6,7 @@
 /*   By: jsoh <jsoh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/04 13:09:57 by jsoh              #+#    #+#             */
-/*   Updated: 2025/10/05 15:57:19 by jsoh             ###   ########.fr       */
+/*   Updated: 2025/10/05 16:39:58 by jsoh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,9 +120,11 @@ static void	ft_check_b(s_stack *a, s_stack *b, s_arr *lis, int *grand_total)
 }
 static void ft_partial_check(s_stack *a, s_stack *b, int num, int *grand_total)
 {
-	/* int chunk_size = 10; // ranges like 0-9, 10-19, etc.
-	int max_rotations = 3; // max number of allowed rotations to reach chunk
-	int rotations = 0;
+	int chunk_size = 10;           // ranges: 0-9, 10-19, etc.
+	int max_rotations = 3;         // maximum rotations allowed
+	int rotations_up = 0;
+	int rotations_down = 0;
+	int top_chunk, bottom_chunk;
 
 	if (b->cnt == 0)
 	{
@@ -131,20 +133,38 @@ static void ft_partial_check(s_stack *a, s_stack *b, int num, int *grand_total)
 		return;
 	}
 
-	// Rotate B at most max_rotations to try to reach a matching chunk
-	while ((b->array[0].index / chunk_size) != (num / chunk_size) && rotations < max_rotations)
+	// Determine the chunk of the top and bottom of B
+	top_chunk = b->array[0].index / chunk_size;
+	bottom_chunk = b->array[b->cnt - 1].index / chunk_size;
+
+	// Count rotations needed in both directions
+	while (rotations_up < b->cnt && (b->array[rotations_up].index / chunk_size) != (num / chunk_size))
+		rotations_up++;
+	while (rotations_down < b->cnt && (b->array[(b->cnt - 1 - rotations_down)].index / chunk_size) != (num / chunk_size))
+		rotations_down++;
+
+	// Rotate in the shorter direction if within max_rotations
+	if (rotations_up <= max_rotations && rotations_up <= rotations_down)
 	{
-		(*grand_total)++;
-		rotate_up(b);
-		rotations++;
+		while (rotations_up-- > 0)
+		{
+			(*grand_total)++;
+			rotate_up(b);
+		}
 	}
- */
-	// Push num into B, either in-chunk (if we rotated) or on top (if rotation limit reached)
+	else if (rotations_down <= max_rotations)
+	{
+		while (rotations_down-- > 0)
+		{
+			(*grand_total)++;
+			rotate_down(b);
+		}
+	}
+	// Else rotation is too expensive, push on top anyway
+
 	(*grand_total)++;
 	push(a, b);
 }
-
-
 
 static void	ft_check_push(s_stack **a, s_stack **b, s_arr *lis, int *grand_total)
 {

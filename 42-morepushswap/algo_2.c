@@ -6,7 +6,7 @@
 /*   By: jsoh <jsoh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/05 13:55:03 by jsoh              #+#    #+#             */
-/*   Updated: 2025/10/05 16:10:24 by jsoh             ###   ########.fr       */
+/*   Updated: 2025/10/05 16:43:32 by jsoh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,35 +140,33 @@ static void ft_consume_cost(s_stack **a, s_stack **b, s_rcost cost)
 	}
 }
 
-//Greedy fit
 void	algo_2(s_stack *a, s_stack *b, s_arr *lis, int *grand_total)
 {
 	int	i;
 	int	dest_posn;
-	int	cost_cap;
 	s_rcost cost;
 
-	cost_cap = 10;
-	while (b -> cnt > 0)
+	while (b->cnt > 0)
 	{
-		i = 0;
-		dest_posn = 0;
-		cost_cap += 10;
-		while (i < b -> cnt)
+		int best_idx = 0;
+		s_rcost best_cost;
+		best_cost.total = INT_MAX;
+
+		// Find element in B with minimal cost to insert into A
+		for (int i = 0; i < b->cnt; i++)
 		{
-			dest_posn = ft_mod_binary_search(a, b -> array[i].index);
-			cost = ft_calculate_cost(dest_posn, i, a -> cnt, b -> cnt);
-			//printf("Cost to place number %-3i: %-3i\n",b -> array[i].index, cost.total);
-			if (cost.total < cost_cap)
+			int dest_posn = ft_mod_binary_search(a, b->array[i].index);
+			s_rcost cost = ft_calculate_cost(dest_posn, i, a->cnt, b->cnt);
+			if (cost.total < best_cost.total)
 			{
-				//printf("Consume\n");
-				*grand_total += cost.total;
-				ft_consume_cost(&a, &b, cost);
-				lis -> array[b -> array[0].index] = 1;
-				(*grand_total)++;
-				push(b,a);
+				best_cost = cost;
+				best_idx = i;
 			}
-			i++;
 		}
+		// Execute minimal cost move
+		*grand_total += best_cost.total;
+		ft_consume_cost(&a, &b, best_cost);
+		push(b, a);
+		(*grand_total)++;
 	}
 }
