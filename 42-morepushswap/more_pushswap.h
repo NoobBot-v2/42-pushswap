@@ -6,7 +6,7 @@
 /*   By: jsoh <jsoh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/06 17:30:38 by jsoh              #+#    #+#             */
-/*   Updated: 2025/10/04 13:27:49 by jsoh             ###   ########.fr       */
+/*   Updated: 2025/10/05 16:02:58 by jsoh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,9 +65,8 @@ void	ft_construct_lis(s_stack *s, s_arr *tails, s_arr *prev, s_arr *LIS);
 int		ft_binary_search(int *tails, int value, int n, s_stack *s);
 void	ft_tails(s_stack *s, s_arr *tails, s_arr *prev);
 
-void	algo_controller_1(s_stack *a, s_stack *b, s_arr *lis, int *grand_total);
-void	algo_controller_2(s_stack *a, s_stack *b, s_arr *lis, int *grand_total);
-void	algo_1(s_stack *a, s_stack *b, s_arr *lis);
+void	algo_1(s_stack *a, s_stack *b, s_arr *lis, int *grand_total);
+void	algo_2(s_stack *a, s_stack *b, s_arr *lis, int *grand_total);
 //void	algo_controller_2(s_stack *a, s_stack *b, s_arr *lis);
 //void find_next_gap(s_stack *s, s_arr *lis);
 

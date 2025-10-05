@@ -6,7 +6,7 @@
 /*   By: jsoh <jsoh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/04 11:21:05 by jsoh              #+#    #+#             */
-/*   Updated: 2025/10/04 11:45:03 by jsoh             ###   ########.fr       */
+/*   Updated: 2025/10/05 13:35:37 by jsoh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ void	ft_init_arr(s_arr **arr, int n)
 		*arr = NULL;
 		return ;
 	}
+	else
+		ft_memset((*arr)->array, 0, n * sizeof(int));
 }
 
 void	ft_free_arr(s_arr **arr)

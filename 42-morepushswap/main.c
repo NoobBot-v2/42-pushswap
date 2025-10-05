@@ -6,7 +6,7 @@
 /*   By: jsoh <jsoh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/06 17:51:00 by jsoh              #+#    #+#             */
-/*   Updated: 2025/10/04 16:24:29 by jsoh             ###   ########.fr       */
+/*   Updated: 2025/10/05 16:02:51 by jsoh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,20 +33,19 @@ int main(int argc, char const *argv[])
 	//printf("LIS\n");
 	stack_view(stack_a);
 	printf("Algo 1\n");
-	algo_1(stack_a, stack_b, lis);
+	algo_1(stack_a, stack_b, lis, &grand_total);
 	for (int j = 0; j < argc; j++)
 	{
 		if(lis -> array[j])
 			printf("num: %-3i lis: %-3i\n",j, lis -> array[j]);
 	}
-	//algo_controller_1(stack_a, stack_b, lis, &grand_total);
-	stack_view(stack_a);
-	stack_view(stack_b);
-	//printf("Algo 2\n");
-	//algo_controller_2(stack_a, stack_b, lis, &grand_total);
 	//stack_view(stack_a);
 	//stack_view(stack_b);
-	//printf("Grand Total: %3i\n",grand_total);
+	printf("Algo 2\n");
+	algo_2(stack_a, stack_b, lis, &grand_total);
+	stack_view(stack_a);
+	stack_view(stack_b);
+	printf("Grand Total: %3i\n",grand_total);
 	free(lis -> array);
 	free(lis);
 	stack_free(&stack_a);
