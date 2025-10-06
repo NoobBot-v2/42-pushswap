@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   algo_2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsoh <jsoh@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: noobdevbot2 <noobdevbot2@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/05 13:55:03 by jsoh              #+#    #+#             */
-/*   Updated: 2025/10/05 17:03:49 by jsoh             ###   ########.fr       */
+/*   Updated: 2025/10/06 15:09:48 by noobdevbot2      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,89 +57,6 @@ static int	ft_mod_binary_search(s_stack *s, int value)
 	return ((start + offset) % s -> cnt);
 }
 
-/* typedef struct s_rcost
-{
-	int ra;
-	int rra;
-	int rb;
-	int rrb;
-	int rr;
-	int rrr;
-	int total;
-} s_rcost; */
-
-static s_rcost	ft_calculate_cost(int dest_posn, int b_posn, int a_cnt, int b_cnt)
-{
-	s_rcost cost;
-
-	cost.ra = 0;
-	cost.rra = 0;
-	cost.rb = 0;
-	cost.rrb = 0;
-	cost.rr = 0;
-	cost.rrr = 0;
-	cost.total = 0;
-
-	if (a_cnt - dest_posn < dest_posn)
-		cost.rra = a_cnt - dest_posn;
-	else
-		cost.ra = dest_posn;
-	if (b_cnt - b_posn < b_posn)
-		cost.rrb = b_cnt - b_posn;
-	else
-		cost.rb = b_posn;
-	while (cost.ra > 0 && cost.rb > 0)
-	{
-		cost.rr++;
-		cost.ra--;
-		cost.rb--;
-	}
-	while (cost.rra > 0 && cost.rrb > 0)
-	{
-		cost.rrr++;
-		cost.rra--;
-		cost.rrb--;
-	}
-	cost.total = cost.ra + cost.rra + cost.rb + cost.rrb + cost.rr + cost.rrr;
-	return (cost);
-}
-
-static void ft_consume_cost(s_stack **a, s_stack **b, s_rcost cost)
-{
-	while (cost.ra > 0)
-	{
-		rotate_up(*a);
-		cost.ra--;
-	}
-	while (cost.rb > 0)
-	{
-		rotate_up(*b);
-		cost.rb--;
-	}
-	while (cost.rra > 0)
-	{
-		rotate_down(*a);
-		cost.rra--;
-	}
-	while (cost.rrb > 0)
-	{
-		rotate_down(*b);
-		cost.rrb--;
-	}
-	while (cost.rr > 0)
-	{
-		rotate_up(*a);
-		rotate_up(*b);
-		cost.rr--;
-	}
-	while (cost.rrr > 0)
-	{
-		rotate_down(*a);
-		rotate_down(*b);
-		cost.rrr--;
-	}
-}
-
 void	algo_2(s_stack *a, s_stack *b, s_arr *lis, int *grand_total)
 {
 	int	i;
@@ -164,7 +81,7 @@ void	algo_2(s_stack *a, s_stack *b, s_arr *lis, int *grand_total)
 		}
 		// Execute minimal cost move
 		*grand_total += best_cost.total;
-		ft_consume_cost(&a, &b, best_cost);
+		ft_consume_cost(a, b, best_cost);
 		push(b, a);
 		(*grand_total)++;
 	}

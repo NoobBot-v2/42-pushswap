@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   math_1.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsoh <jsoh@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: noobdevbot2 <noobdevbot2@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/24 16:56:20 by jsoh              #+#    #+#             */
-/*   Updated: 2025/09/28 21:10:18 by jsoh             ###   ########.fr       */
+/*   Updated: 2025/10/06 15:02:12 by noobdevbot2      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,3 @@ int	get_max_num(const s_stack *s)
 	return(s -> array[get_max_index(s)].val);
 }
 
-int	get_min_num(const s_stack *s)
-{
-	return(s -> array[get_min_index(s)].val);
-}

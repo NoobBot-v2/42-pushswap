@@ -3,178 +3,95 @@
 /*                                                        :::      ::::::::   */
 /*   algo_1.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsoh <jsoh@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: noobdevbot2 <noobdevbot2@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/25 15:19:54 by noobdevbot2       #+#    #+#             */
-/*   Updated: 2025/10/04 13:00:36 by jsoh             ###   ########.fr       */
+/*   Created: 2025/10/04 13:09:57 by jsoh              #+#    #+#             */
+/*   Updated: 2025/10/06 14:58:55 by noobdevbot2      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "more_pushswap.h"
 
-//Always starts from the top, so if the last number out of the LIS has been pushed out, it will loop back
-static int dist_to_next_lis(s_arr *lis, s_stack *s)
+static void	ft_check_b(s_stack *a, s_stack *b, s_arr *lis, int *grand_total)
 {
-	int i;
+	int	prev_lis;
+	int	next_lis;
+	int	b_posn;
+	int	i;
 
 	i = 0;
-	while (i < s -> cnt)
+	if (a -> cnt == 0 || b -> cnt == 0)
+		return ;
+	b_posn = ft_search_b_posn(a, b, lis);
+	if (0 <= b_posn && b_posn < 10)
 	{
-		if (lis -> array[s -> array[i].index] == 1)
-			return (i);
-		i++;
+		ft_b_rotation(b, b_posn, grand_total);
+		printf("Pushing fit: %-3i\n", b -> array[0].index);
+		lis -> array[b -> array[0].index] = 1;
+		(*grand_total)++;
+		push(b,a);
+		(*grand_total)++;
+		rotate_up(a);
 	}
-	return (-1);
 }
 
-static int dist_to_next_next_lis(s_arr *lis, s_stack *s)
+static void	ft_check_push(s_stack *a, s_stack *b, s_arr *lis, int *grand_total)
 {
-	int i;
+	int	current;
+	int	b_fit;
 
-	i = 0;
-	while (i < s -> cnt)
+	current = a -> array[0].index;
+	if (lis -> array [current] == 0)
 	{
-		if (lis -> array[s -> array[i].index] == 1)
-			break ;
-		i++;
-	}
-	i++;//Add 1 more to skip current number
-	while (i < s -> cnt)
-	{
-		if (lis -> array[s -> array[i].index] == 1)
-			return (i);
-		i++;
-	}
-	return (-1);
-	//Current i of the first encountered lis.
-}
-
-static int dist_last_lis(s_arr *lis, s_stack *s)
-{
-	int i;
-
-	i = s -> cnt;
-	while (i > 0)
-	{
-		if (lis -> array[s -> array[i].index] == 1)
-			return (i);
-		i--;
-	}
-	return (-1);
-}
-
-//Check b returns location of first number that fits
-static int check_b_stack(s_stack *s, int last, int next)
-{
-	int i;
-
-	if (s -> cnt == 0)
-		return (-1);
-	i = 0;
-	//printf("checking\n");
-	//If last > next, means its the head/end
-	if (last > next)
-	{
-		while (i < s -> cnt)
-		{
-			//has to be bigger than both last and first
-			if (last < s -> array[i].index && s -> array[i].index > next)
-				return (i);
-			i++;
-		}
+		printf("pushing: %-3i\n", current);
+		(*grand_total)++;
+		push(a, b);
 	}
 	else
 	{
-		while (i < s -> cnt)
-		{
-			//0 < 1 && 1 < 2
-			if (last < s -> array[i].index && s -> array[i].index < next)
-				return (i);
-			i++;
-		}
+		printf("rotate\n");
+		(*grand_total)++;
+		rotate_up(a);
 	}
-	return (-1);
 }
 
-//Takes in the s_stack and lis
-void	algo_controller_1(s_stack *a, s_stack *b, s_arr *lis, int *grand_total)
+static void	ft_check_swap(s_stack *a, s_arr *lis, int *grand_total)
 {
-	int	i;
-	int	dist_lis;
-	int last_lis;
-	int	lis_val_1;
-	int	lis_val_2;
-	int	b_fit;
+	int	current;
+	int	next;
 
-	int	b_up;
-	int	b_down;
-
-	i = 0;
-	//Get first lis and keep
-	last_lis = dist_last_lis(lis, a);
-	lis_val_1 = a -> array[last_lis].index;
-	while (i < a -> cnt)
+	if (a -> cnt < 2)
+		return ;
+	current = a -> array[0].index;
+	next = a -> array[1].index;
+	if (lis -> array[current] || lis -> array[next])
 	{
-		//Always print next LIS Flag outside
-		dist_lis = dist_to_next_lis(lis, a);
-		lis_val_2 = a -> array[dist_lis].index;
-		//printf("\nfirst dist: %3i val: %3i\n", dist_lis, lis_val_1);
-		//printf("2nd   dist: %3i val: %3i\n", dist_lis, lis_val_2);
-		b_fit = check_b_stack(b, lis_val_1, lis_val_2);
-		if (b_fit > 0)
+		if (current - next == 1)
 		{
-			//if (lis -> array[a -> array[0].index] == 1)
-			//	rotate_up(a);
-			lis -> array[b -> array[b_fit].index] = 1;
-			b_up = b_fit;
-			b_down = b -> cnt - b_fit;
-			if (b_down < b_up)
-			{
-				//printf("rrb: %3i\n",b_up);
-				while (b_down)
-				{
-					//printf("rrb\n");
-					(*grand_total)++;
-					rotate_down(b);
-					b_down--;
-				}
-			}
-			else
-			{
-				//printf("rb: %3i\n",b_up);
-				while (b_up > 0)
-				{
-					//printf("rb\n");
-					(*grand_total)++;
-					rotate_up(b);
-					b_up--;
-				}
-			}
-			//printf("b-fits pushing\n");
-			//printf("pb\n");
+			printf("swap\n");
 			(*grand_total)++;
-			push(b, a);
-			//printf("ra\n");
-			//rotate_up(a);
-			last_lis = dist_last_lis(lis, a);
-			lis_val_1 = a -> array[last_lis].index;
-			dist_lis = dist_to_next_lis(lis, a);
-			lis_val_2 = a -> array[dist_lis].index;
-		}
-		if (lis -> array[a -> array[0].index] == 0)
-		{
-			//printf("pa\n");
-			(*grand_total)++;
-			push(a, b);
-		}
-		else
-		{
-			//prev LIS flag has been reached, find the next LIS flag starting from prev LIS flag
-			lis_val_1 = a -> array[0].index;
-			//printf("ra\n");
-			(*grand_total)++;
-			rotate_up(a);
-			i++;
+			swap(a);
+			lis -> array[next] = 1;
+			lis -> array[current] = 1;
 		}
 	}
+}
+
+void	algo_1(s_stack *a, s_stack *b, s_arr *lis, int *grand_total)
+{
+	int	i;
+
+	i = 0;
+	if (!a || !b)
+		return ;
+	while (i < a -> cap)
+	{
+		printf("\n----------\nCurrent Number: %-3i\n", a -> array[0].index);
+		ft_check_swap(a, lis, grand_total);
+		ft_check_push(a, b, lis, grand_total);
+		printf("Current Number: %-3i\n", a -> array[0].index);
+		ft_check_b(a, b, lis, grand_total);
+		i++;
+	}
+	printf("Algo 1 moves: %-3i\n",*grand_total);
 }

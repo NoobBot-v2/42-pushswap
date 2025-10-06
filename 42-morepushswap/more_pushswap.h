@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   more_pushswap.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsoh <jsoh@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: noobdevbot2 <noobdevbot2@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/06 17:30:38 by jsoh              #+#    #+#             */
-/*   Updated: 2025/10/05 16:02:58 by jsoh             ###   ########.fr       */
+/*   Updated: 2025/10/06 15:09:15 by noobdevbot2      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ typedef struct s_stack
 	s_num *array;
 } s_stack;
 
-int	get_max_num(const s_stack *s);
+int		get_max_num(const s_stack *s);
 
 void	radix_sort(s_stack *s1);
 void	radix_controller(s_stack *s);
@@ -58,22 +58,25 @@ void	stack_init(s_stack *stack, char const *argv[]);
 void	stack_view(s_stack *stack);
 
 void	lis_controller(s_stack *s, s_arr *lis);
-
-int		ft_lis_head_idx(s_stack *s, s_arr *lis);
-int		ft_lis_end_idx(s_stack *s, s_arr *lis);
 void	ft_construct_lis(s_stack *s, s_arr *tails, s_arr *prev, s_arr *LIS);
 int		ft_binary_search(int *tails, int value, int n, s_stack *s);
 void	ft_tails(s_stack *s, s_arr *tails, s_arr *prev);
 
+int		dist_to_next_lis(s_arr *lis, s_stack *s);
+int		dist_last_lis(s_arr *lis, s_stack *s);
+int		ft_search_b_posn(s_stack *a, s_stack *b, s_arr *lis);
+void	ft_b_rotation(s_stack *b, int b_posn, int *grand_total);
+
 void	algo_1(s_stack *a, s_stack *b, s_arr *lis, int *grand_total);
 void	algo_2(s_stack *a, s_stack *b, s_arr *lis, int *grand_total);
-//void	algo_controller_2(s_stack *a, s_stack *b, s_arr *lis);
-//void find_next_gap(s_stack *s, s_arr *lis);
 
 int		get_min_index(const s_stack *s);
 
 void	ft_init_arr(s_arr **arr, int n);
 void	ft_free_arr(s_arr **arr);
+
+void	ft_consume_cost(s_stack *a, s_stack *b, s_rcost cost);
+s_rcost	ft_calculate_cost(int dest_posn, int b_posn, int a_cnt, int b_cnt);
 
 void	rotate_up(s_stack *stack);
 void	rotate_down(s_stack *stack);
