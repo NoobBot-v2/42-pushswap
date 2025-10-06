@@ -6,7 +6,7 @@
 /*   By: noobdevbot2 <noobdevbot2@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 15:04:09 by noobdevbot2       #+#    #+#             */
-/*   Updated: 2025/10/06 15:09:08 by noobdevbot2      ###   ########.fr       */
+/*   Updated: 2025/10/06 15:32:53 by noobdevbot2      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,38 +52,13 @@ s_rcost	ft_calculate_cost(int dest_posn, int b_posn, int a_cnt, int b_cnt)
 	return (cost);
 }
 
-void ft_consume_cost(s_stack *a, s_stack *b, s_rcost cost)
+void ft_consume_cost(s_stack *a, s_stack *b, s_rcost *cost)
 {
-	while (cost.ra > 0)
-	{
-		rotate_up(a);
-		cost.ra--;
-	}
-	while (cost.rb > 0)
-	{
-		rotate_up(b);
-		cost.rb--;
-	}
-	while (cost.rra > 0)
-	{
-		rotate_down(a);
-		cost.rra--;
-	}
-	while (cost.rrb > 0)
-	{
-		rotate_down(b);
-		cost.rrb--;
-	}
-	while (cost.rr > 0)
-	{
-		rotate_up(a);
-		rotate_up(b);
-		cost.rr--;
-	}
-	while (cost.rrr > 0)
-	{
-		rotate_down(a);
-		rotate_down(b);
-		cost.rrr--;
-	}
+	ft_ra_rb(a, 'a', cost -> ra);
+	ft_ra_rb(b, 'b', cost -> rb);
+	ft_rra_rrb(a, 'a', cost -> rra);
+	ft_rra_rrb(b, 'b', cost -> rrb);
+	ft_rr(a, b, cost -> rr);
+	ft_rrr(a, b, cost -> rrr);
+	ft_init_cost(cost);
 }

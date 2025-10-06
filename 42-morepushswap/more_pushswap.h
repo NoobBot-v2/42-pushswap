@@ -6,7 +6,7 @@
 /*   By: noobdevbot2 <noobdevbot2@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/06 17:30:38 by jsoh              #+#    #+#             */
-/*   Updated: 2025/10/06 15:09:15 by noobdevbot2      ###   ########.fr       */
+/*   Updated: 2025/10/06 16:37:30 by noobdevbot2      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,11 @@ typedef struct s_stack
 	s_num *array;
 } s_stack;
 
-int		get_max_num(const s_stack *s);
+void	ft_init(s_stack **a, s_arr **lis, int argc, char const *argv[]);
 
+int		get_max_num(const s_stack *s);
+int		get_min_index(const s_stack *s);
+void	rotate_to_top(s_stack *s, int idx, int *grand_total);
 void	radix_sort(s_stack *s1);
 void	radix_controller(s_stack *s);
 
@@ -70,13 +73,17 @@ void	ft_b_rotation(s_stack *b, int b_posn, int *grand_total);
 void	algo_1(s_stack *a, s_stack *b, s_arr *lis, int *grand_total);
 void	algo_2(s_stack *a, s_stack *b, s_arr *lis, int *grand_total);
 
-int		get_min_index(const s_stack *s);
-
 void	ft_init_arr(s_arr **arr, int n);
 void	ft_free_arr(s_arr **arr);
+void	ft_free_all(s_stack **a, s_stack **b, s_arr **lis);
 
-void	ft_consume_cost(s_stack *a, s_stack *b, s_rcost cost);
+void	ft_consume_cost(s_stack *a, s_stack *b, s_rcost *cost);
 s_rcost	ft_calculate_cost(int dest_posn, int b_posn, int a_cnt, int b_cnt);
+
+void	ft_ra_rb(s_stack *s, int c, int n);
+void	ft_rra_rrb(s_stack *s, int c, int n);
+void	ft_rr(s_stack *a, s_stack *b, int n);
+void	ft_rrr(s_stack *a, s_stack *b, int n);
 
 void	rotate_up(s_stack *stack);
 void	rotate_down(s_stack *stack);

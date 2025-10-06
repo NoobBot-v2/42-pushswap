@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lis_3.c                                            :+:      :+:    :+:   */
+/*   lis_1.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsoh <jsoh@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: noobdevbot2 <noobdevbot2@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/25 08:58:23 by noobdevbot2       #+#    #+#             */
-/*   Updated: 2025/10/05 13:29:42 by jsoh             ###   ########.fr       */
+/*   Updated: 2025/10/06 15:54:21 by noobdevbot2      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ void	lis_controller(s_stack *s, s_arr *lis)
 		prev -> array[i++] = -1;
 	ft_tails(s, tails, prev);
 	ft_construct_lis(s, tails, prev, lis);
-	printf("Tail Len: %i\n", tails -> n);
 	original_idx(s, offset);
 	ft_free_arr(&prev);
 	ft_free_arr(&tails);

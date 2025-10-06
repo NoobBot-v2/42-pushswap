@@ -6,7 +6,7 @@
 /*   By: noobdevbot2 <noobdevbot2@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/04 13:09:57 by jsoh              #+#    #+#             */
-/*   Updated: 2025/10/06 14:58:55 by noobdevbot2      ###   ########.fr       */
+/*   Updated: 2025/10/06 16:44:50 by noobdevbot2      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,12 @@ static void	ft_check_b(s_stack *a, s_stack *b, s_arr *lis, int *grand_total)
 	if (0 <= b_posn && b_posn < 10)
 	{
 		ft_b_rotation(b, b_posn, grand_total);
-		printf("Pushing fit: %-3i\n", b -> array[0].index);
 		lis -> array[b -> array[0].index] = 1;
 		(*grand_total)++;
+		printf("pa\n");
 		push(b,a);
 		(*grand_total)++;
+		printf("ra\n");
 		rotate_up(a);
 	}
 }
@@ -43,13 +44,13 @@ static void	ft_check_push(s_stack *a, s_stack *b, s_arr *lis, int *grand_total)
 	current = a -> array[0].index;
 	if (lis -> array [current] == 0)
 	{
-		printf("pushing: %-3i\n", current);
+		printf("pb\n");
 		(*grand_total)++;
 		push(a, b);
 	}
 	else
 	{
-		printf("rotate\n");
+		printf("ra\n");
 		(*grand_total)++;
 		rotate_up(a);
 	}
@@ -68,7 +69,7 @@ static void	ft_check_swap(s_stack *a, s_arr *lis, int *grand_total)
 	{
 		if (current - next == 1)
 		{
-			printf("swap\n");
+			printf("sa\n");
 			(*grand_total)++;
 			swap(a);
 			lis -> array[next] = 1;
@@ -86,12 +87,8 @@ void	algo_1(s_stack *a, s_stack *b, s_arr *lis, int *grand_total)
 		return ;
 	while (i < a -> cap)
 	{
-		printf("\n----------\nCurrent Number: %-3i\n", a -> array[0].index);
 		ft_check_swap(a, lis, grand_total);
 		ft_check_push(a, b, lis, grand_total);
-		printf("Current Number: %-3i\n", a -> array[0].index);
-		ft_check_b(a, b, lis, grand_total);
 		i++;
 	}
-	printf("Algo 1 moves: %-3i\n",*grand_total);
 }
