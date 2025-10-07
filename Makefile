@@ -2,9 +2,24 @@
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
 
-# Source files
-SRC = math_1.c more_stack_1.c master_controller.c radix_sort.c dest_idx.c lis_1.c \
-      main.c operators_1.c operators_2.c helper_1.c lis_helper.c algo_1.c algo_2.c cost_1.c
+SRC = math_1.c \
+      more_stack_1.c \
+      master_controller.c \
+      radix_sort.c \
+      dest_idx.c \
+      lis_1.c \
+      main.c \
+      operators_1.c \
+      operators_2.c \
+      helper_1.c \
+      lis_helper.c \
+      algo_1.c \
+      algo_2.c \
+      cost_1.c \
+      guard_1.c \
+	  3_sort.c \
+	  5_sort.c
+
 OBJ = $(SRC:.c=.o)
 
 # Executable name

@@ -6,7 +6,7 @@
 /*   By: jsoh <jsoh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 18:58:27 by jsoh              #+#    #+#             */
-/*   Updated: 2025/10/07 11:51:35 by jsoh             ###   ########.fr       */
+/*   Updated: 2025/10/07 15:48:35 by jsoh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,24 +22,30 @@ void	stack_create(t_stack **stack, int size, char type)
 		return ;
 	ft_memset((*stack)-> array, 0, size * sizeof(t_num));
 	if (type == 'a')
-		(*stack)->cnt = size - 1;
+		(*stack)->cnt = size;
 	else if (type == 'b')
 		(*stack)->cnt = 0;
 	(*stack)->cap = size;
 }
 
-void	stack_init(t_stack *s, char const *argv[])
+int	stack_init(t_stack *s, char const **argv)
 {
 	int	index;
+	int	check;
 
 	index = 0;
+	check = 0;
 	ft_memset(s->array, 0, sizeof(s->array[0]) * s -> cap);
 	while (index < s->cnt)
 	{
-		s -> array[index].val = ft_atoi(argv[index + 1]);
+		check = ft_not_valid_numbers(argv[index]);
+		if (check == 1)
+			break ;
+		s -> array[index].val = ft_atoi(argv[index]);
 		s -> array[index].index = index;
 		index++;
 	}
+	return (check);
 }
 
 void	stack_view(t_stack *s)
@@ -47,7 +53,7 @@ void	stack_view(t_stack *s)
 	int	index;
 
 	index = 0;
-	printf("Stack View: %i\n", s -> cnt);
+	ft_printf("Stack View: %i\n", s -> cnt);
 	while (index < s -> cnt)
 	{
 		ft_printf("p_idx: %-5i num: %-5i idx: %-5i\n", index,

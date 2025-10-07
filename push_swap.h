@@ -6,7 +6,7 @@
 /*   By: jsoh <jsoh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/06 17:30:38 by jsoh              #+#    #+#             */
-/*   Updated: 2025/10/07 11:52:34 by jsoh             ###   ########.fr       */
+/*   Updated: 2025/10/07 16:21:59 by jsoh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,17 +47,21 @@ typedef struct s_stack
 	t_num	*array;
 }	t_stack;
 
-void	ft_init(t_stack **a, t_arr **lis, int argc, char const *argv[]);
+int		ft_init(t_stack **a, t_arr **lis, int argc, char const **argv);
 
 int		get_max_num(const t_stack *s);
+int		get_max_index(const t_stack *s);
 int		get_min_index(const t_stack *s);
+int		ft_not_valid_numbers(char const *argv);
+int		ft_check_dupes(t_stack *s);
+
 void	rotate_to_top(t_stack *s, int idx);
 void	radix_sort(t_stack *s1);
 void	radix_controller(t_stack *s);
 
 void	stack_create(t_stack **stack, int size, char type);
 void	stack_free(t_stack **stack);
-void	stack_init(t_stack *stack, char const *argv[]);
+int		stack_init(t_stack *stack, char const **argv);
 void	stack_view(t_stack *stack);
 
 void	lis_controller(t_stack *s, t_arr *lis);
@@ -67,6 +71,8 @@ void	ft_tails(t_stack *s, t_arr *tails, t_arr *prev);
 
 void	algo_1(t_stack *a, t_stack *b, t_arr *lis);
 void	algo_2(t_stack *a, t_stack *b);
+void	ft_3_sort(t_stack *a);
+void	ft_5_sort(t_stack *a, t_stack *b);
 
 void	ft_init_arr(t_arr **arr, int n);
 void	ft_free_arr(t_arr **arr);
