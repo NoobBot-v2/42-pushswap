@@ -6,7 +6,7 @@
 /*   By: jsoh <jsoh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/07 13:13:31 by jsoh              #+#    #+#             */
-/*   Updated: 2025/10/07 17:04:55 by jsoh             ###   ########.fr       */
+/*   Updated: 2025/10/07 17:40:30 by jsoh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,11 @@ void	ft_5_sort(t_stack *a, t_stack *b)
 {
 	rotate_to_top(a, get_min_index(a));
 	ft_pb(a, b);
-	rotate_to_top(a, get_min_index(a));
-	ft_pb(a, b);
+	if (a -> cnt == 4)
+	{
+		rotate_to_top(a, get_min_index(a));
+		ft_pb(a, b);
+	}
 	ft_3_sort(a);
 	rotate_to_top(a, get_min_index(a));
 	while (b -> cnt > 0)

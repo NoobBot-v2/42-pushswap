@@ -6,7 +6,7 @@
 /*   By: jsoh <jsoh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/06 17:51:00 by jsoh              #+#    #+#             */
-/*   Updated: 2025/10/07 17:06:56 by jsoh             ###   ########.fr       */
+/*   Updated: 2025/10/07 21:48:59 by jsoh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void	algo_controller(t_stack *a, t_stack *b, t_arr *lis)
 	}
 	if (a -> cnt == 3)
 		ft_3_sort(a);
-	else if (a -> cnt == 5)
+	else if (a -> cnt == 4 || a -> cnt == 5)
 		ft_5_sort(a, b);
 	else
 	{
@@ -40,19 +40,17 @@ int	main(int argc, char const *argv[])
 
 	stack_b = NULL;
 	if (argc == 1)
-	{
-		ft_printf("Error\n");
 		return (0);
-	}
 	if (ft_init(&stack_a, &lis, argc, argv))
 	{
 		ft_free_all(&stack_a, &stack_b, &lis);
-		ft_printf("Error\n");
+		ft_error_msg();
 		return (0);
 	}
 	if (ft_check_dupes(stack_a))
 	{
-		ft_printf("Error\n");
+		ft_free_all(&stack_a, &stack_b, &lis);
+		ft_error_msg();
 		return (0);
 	}
 	stack_create(&stack_b, stack_a -> cap, 'b');

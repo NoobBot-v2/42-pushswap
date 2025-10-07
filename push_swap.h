@@ -6,7 +6,7 @@
 /*   By: jsoh <jsoh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/06 17:30:38 by jsoh              #+#    #+#             */
-/*   Updated: 2025/10/07 16:21:59 by jsoh             ###   ########.fr       */
+/*   Updated: 2025/10/07 22:03:21 by jsoh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define PUSH_SWAP_H
 # include <stdio.h>
 # include <stdlib.h>
+# include <limits.h>
 # include "../libft/libft.h"
 # include "../libft/printf.h"
 
@@ -52,8 +53,10 @@ int		ft_init(t_stack **a, t_arr **lis, int argc, char const **argv);
 int		get_max_num(const t_stack *s);
 int		get_max_index(const t_stack *s);
 int		get_min_index(const t_stack *s);
+int		ft_guarded_atoi(const char *nptr, int *error);
 int		ft_not_valid_numbers(char const *argv);
 int		ft_check_dupes(t_stack *s);
+void	ft_error_msg();
 
 void	rotate_to_top(t_stack *s, int idx);
 void	radix_sort(t_stack *s1);

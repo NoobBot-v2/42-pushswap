@@ -6,7 +6,7 @@
 /*   By: jsoh <jsoh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 18:58:27 by jsoh              #+#    #+#             */
-/*   Updated: 2025/10/07 15:48:35 by jsoh             ###   ########.fr       */
+/*   Updated: 2025/10/07 22:04:37 by jsoh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,9 @@ int	stack_init(t_stack *s, char const **argv)
 {
 	int	index;
 	int	check;
+	int	error;
 
+	error = 0;
 	index = 0;
 	check = 0;
 	ft_memset(s->array, 0, sizeof(s->array[0]) * s -> cap);
@@ -40,12 +42,14 @@ int	stack_init(t_stack *s, char const **argv)
 	{
 		check = ft_not_valid_numbers(argv[index]);
 		if (check == 1)
-			break ;
-		s -> array[index].val = ft_atoi(argv[index]);
+			return (1);
+		s -> array[index].val = ft_guarded_atoi(argv[index], &error);
+		if (error == 1)
+			return (1);
 		s -> array[index].index = index;
 		index++;
 	}
-	return (check);
+	return (0);
 }
 
 void	stack_view(t_stack *s)
