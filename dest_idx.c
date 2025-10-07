@@ -6,15 +6,15 @@
 /*   By: jsoh <jsoh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/06 18:52:59 by jsoh              #+#    #+#             */
-/*   Updated: 2025/09/06 20:12:13 by jsoh             ###   ########.fr       */
+/*   Updated: 2025/10/07 11:50:05 by jsoh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "more_pushswap.h"
+#include "push_swap.h"
 
-static void	split_stack(s_stack *s, s_stack *positive, s_stack *negative)
+static void	split_stack(t_stack *s, t_stack *positive, t_stack *negative)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < s -> cnt)
@@ -34,9 +34,9 @@ static void	split_stack(s_stack *s, s_stack *positive, s_stack *negative)
 	}
 }
 
-static void original_dest(s_stack *s)
+static void	original_dest(t_stack *s)
 {
-	s_stack	*temp;
+	t_stack	*temp;
 	int		i;
 	int		orig_idx;
 
@@ -61,10 +61,10 @@ static void original_dest(s_stack *s)
 	stack_free(&temp);
 }
 
-static void recombine_stack(s_stack *s, s_stack *positive, s_stack *negative)
+static void	recombine_stack(t_stack *s, t_stack *positive, t_stack *negative)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	j = 0;
 	i = negative -> cnt - 1;
@@ -85,10 +85,10 @@ static void recombine_stack(s_stack *s, s_stack *positive, s_stack *negative)
 	original_dest(s);
 }
 
-void	radix_controller(s_stack *s)
+void	radix_controller(t_stack *s)
 {
-	s_stack *positive;
-	s_stack *negative;
+	t_stack	*positive;
+	t_stack	*negative;
 
 	stack_create(&positive, s -> cap, 'b');
 	stack_create(&negative, s -> cap, 'b');

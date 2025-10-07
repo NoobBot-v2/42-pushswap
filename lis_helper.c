@@ -6,13 +6,13 @@
 /*   By: jsoh <jsoh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/04 11:17:56 by jsoh              #+#    #+#             */
-/*   Updated: 2025/10/05 15:32:05 by jsoh             ###   ########.fr       */
+/*   Updated: 2025/10/07 11:50:48 by jsoh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "more_pushswap.h"
+#include "push_swap.h"
 
-int	ft_binary_search(int *tails, int value, int n, s_stack *s)
+int	ft_binary_search(int *tails, int value, int n, t_stack *s)
 {
 	int	start;
 	int	end;
@@ -31,7 +31,7 @@ int	ft_binary_search(int *tails, int value, int n, s_stack *s)
 	return (start);
 }
 
-void	ft_construct_lis(s_stack *s, s_arr *tails, s_arr *prev, s_arr *LIS)
+void	ft_construct_lis(t_stack *s, t_arr *tails, t_arr *prev, t_arr *LIS)
 {
 	int	prev_num;
 
@@ -46,7 +46,7 @@ void	ft_construct_lis(s_stack *s, s_arr *tails, s_arr *prev, s_arr *LIS)
 	}
 }
 
-void	ft_tails(s_stack *s, s_arr *tails, s_arr *prev)
+void	ft_tails(t_stack *s, t_arr *tails, t_arr *prev)
 {
 	int	i;
 	int	posn;
@@ -66,7 +66,7 @@ void	ft_tails(s_stack *s, s_arr *tails, s_arr *prev)
 	}
 }
 
-int	ft_lis_head_idx(s_stack *s, s_arr *lis)
+int	ft_lis_head_idx(t_stack *s, t_arr *lis)
 {
 	int	i;
 	int	j;
@@ -88,7 +88,7 @@ int	ft_lis_head_idx(s_stack *s, s_arr *lis)
 	return (j);
 }
 
-int	ft_lis_end_idx(s_stack *s, s_arr *lis)
+int	ft_lis_end_idx(t_stack *s, t_arr *lis)
 {
 	int	i;
 	int	j;

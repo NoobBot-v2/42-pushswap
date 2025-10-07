@@ -6,13 +6,13 @@
 /*   By: jsoh <jsoh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/06 17:38:38 by jsoh              #+#    #+#             */
-/*   Updated: 2025/09/06 19:31:04 by jsoh             ###   ########.fr       */
+/*   Updated: 2025/10/07 11:52:01 by jsoh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "more_pushswap.h"
+#include "push_swap.h"
 
-static int	max_digit_count(s_stack *s)
+static int	max_digit_count(t_stack *s)
 {
 	int	max;
 	int	digits;
@@ -29,7 +29,7 @@ static int	max_digit_count(s_stack *s)
 	return (digits);
 }
 
-static void	counting_sort(s_stack *s, int prefix[], int digit_place)
+static void	counting_sort(t_stack *s, int prefix[], int digit_place)
 {
 	int	i;
 	int	count[10];
@@ -50,7 +50,7 @@ static void	counting_sort(s_stack *s, int prefix[], int digit_place)
 	}
 }
 
-static void	prefix_sort(s_stack *s1, s_stack *temp, int exp)
+static void	prefix_sort(t_stack *s1, t_stack *temp, int exp)
 {
 	int	prefix[10];
 	int	i;
@@ -68,12 +68,12 @@ static void	prefix_sort(s_stack *s1, s_stack *temp, int exp)
 	}
 }
 
-void	radix_sort(s_stack *s1)
+void	radix_sort(t_stack *s1)
 {
 	int		max;
 	int		exp;
 	int		i;
-	s_stack	*temp;
+	t_stack	*temp;
 
 	stack_create(&temp, s1 -> cap, 'b');
 	if (!temp)

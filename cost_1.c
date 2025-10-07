@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   cost_1.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noobdevbot2 <noobdevbot2@student.42.fr>    +#+  +:+       +#+        */
+/*   By: jsoh <jsoh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 15:04:09 by noobdevbot2       #+#    #+#             */
-/*   Updated: 2025/10/06 15:32:53 by noobdevbot2      ###   ########.fr       */
+/*   Updated: 2025/10/07 11:49:57 by jsoh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "more_pushswap.h"
+#include "push_swap.h"
 
-static void	ft_init_cost(s_rcost *cost)
+static void	ft_init_cost(t_rcost *cost)
 {
 	cost -> ra = 0;
 	cost -> rra = 0;
@@ -23,9 +23,9 @@ static void	ft_init_cost(s_rcost *cost)
 	cost -> total = 0;
 }
 
-s_rcost	ft_calculate_cost(int dest_posn, int b_posn, int a_cnt, int b_cnt)
+t_rcost	ft_calculate_cost(int dest_posn, int b_posn, int a_cnt, int b_cnt)
 {
-	s_rcost cost;
+	t_rcost	cost;
 
 	ft_init_cost(&cost);
 	if (a_cnt - dest_posn < dest_posn)
@@ -52,7 +52,7 @@ s_rcost	ft_calculate_cost(int dest_posn, int b_posn, int a_cnt, int b_cnt)
 	return (cost);
 }
 
-void ft_consume_cost(s_stack *a, s_stack *b, s_rcost *cost)
+void	ft_consume_cost(t_stack *a, t_stack *b, t_rcost *cost)
 {
 	ft_ra_rb(a, 'a', cost -> ra);
 	ft_ra_rb(b, 'b', cost -> rb);

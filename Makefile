@@ -1,35 +1,36 @@
 # Compiler and flags
-CC = gcc
-CFLAGS = 
+CC = cc
+CFLAGS = -Wall -Wextra -Werror
 
 # Source files
 SRC = math_1.c more_stack_1.c master_controller.c radix_sort.c dest_idx.c lis_1.c \
-		main.c operators_1.c operators_2.c helper_1.c lis_helper.c algo_1.c \
-		algo_1_helper.c algo_2.c cost_1.c
+      main.c operators_1.c operators_2.c helper_1.c lis_helper.c algo_1.c algo_2.c cost_1.c
 OBJ = $(SRC:.c=.o)
 
 # Executable name
-NAME = pushswap
+NAME = push_swap
 
 # Path to libft
-LIBFT_DIR = ../libft
+LIBFT_DIR = libft
 LIBFT_LIB = $(LIBFT_DIR)/libft.a
 LIBFT_INC = $(LIBFT_DIR)
 
-# Default target
+# -----------------------------
+# Targets
+# -----------------------------
 all: $(LIBFT_LIB) $(NAME)
-
-# Build executable
-$(NAME): $(OBJ)
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJ) -L $(LIBFT_DIR) -lft
-
-# Compile .c files to .o
-%.o: %.c
-	$(CC) $(CFLAGS) -I $(LIBFT_INC) -c $< -o $@
 
 # Build libft first
 $(LIBFT_LIB):
-	$(MAKE) -C $(LIBFT_DIR)
+	$(MAKE) -C $(LIBFT_DIR) all
+
+# Build pushswap
+$(NAME): $(OBJ)
+	$(CC) $(CFLAGS) -o $(NAME) $(OBJ) -L$(LIBFT_DIR) -lft -I$(LIBFT_INC)
+
+# Compile .c to .o
+%.o: %.c
+	$(CC) $(CFLAGS) -I$(LIBFT_INC) -c $< -o $@
 
 # Clean object files
 clean:

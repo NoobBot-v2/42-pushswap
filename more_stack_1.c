@@ -6,21 +6,21 @@
 /*   By: jsoh <jsoh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 18:58:27 by jsoh              #+#    #+#             */
-/*   Updated: 2025/10/04 12:16:25 by jsoh             ###   ########.fr       */
+/*   Updated: 2025/10/07 11:51:35 by jsoh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "more_pushswap.h"
+#include "push_swap.h"
 
-void	stack_create(s_stack **stack, int size, char type)
+void	stack_create(t_stack **stack, int size, char type)
 {
-	(*stack) = (s_stack *)malloc(sizeof(s_stack));
+	(*stack) = (t_stack *)malloc(sizeof(t_stack));
 	if (!stack)
 		return ;
-	(*stack)->array = (s_num *)malloc(size * sizeof(s_num));
+	(*stack)->array = (t_num *)malloc(size * sizeof(t_num));
 	if (!(*stack)->array)
 		return ;
-	ft_memset((*stack) -> array, 0, size * sizeof(s_num));
+	ft_memset((*stack)-> array, 0, size * sizeof(t_num));
 	if (type == 'a')
 		(*stack)->cnt = size - 1;
 	else if (type == 'b')
@@ -28,7 +28,7 @@ void	stack_create(s_stack **stack, int size, char type)
 	(*stack)->cap = size;
 }
 
-void	stack_init(s_stack *s, char const *argv[])
+void	stack_init(t_stack *s, char const *argv[])
 {
 	int	index;
 
@@ -42,20 +42,21 @@ void	stack_init(s_stack *s, char const *argv[])
 	}
 }
 
-void	stack_view(s_stack *s)
+void	stack_view(t_stack *s)
 {
 	int	index;
 
 	index = 0;
-	printf("Stack View: %i\n",s -> cnt);
+	printf("Stack View: %i\n", s -> cnt);
 	while (index < s -> cnt)
 	{
-		printf("p_idx: %-5i num: %-5i idx: %-5i\n",index ,s -> array[index].val, s -> array[index].index);
+		ft_printf("p_idx: %-5i num: %-5i idx: %-5i\n", index,
+			s -> array[index].val, s -> array[index].index);
 		index++;
 	}
 }
 
-void	stack_free(s_stack **stack)
+void	stack_free(t_stack **stack)
 {
 	if (!stack || !*stack)
 		return ;

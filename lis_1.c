@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   lis_1.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noobdevbot2 <noobdevbot2@student.42.fr>    +#+  +:+       +#+        */
+/*   By: jsoh <jsoh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/25 08:58:23 by noobdevbot2       #+#    #+#             */
-/*   Updated: 2025/10/06 15:54:21 by noobdevbot2      ###   ########.fr       */
+/*   Updated: 2025/10/07 11:50:31 by jsoh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "more_pushswap.h"
+#include "push_swap.h"
 
-static int	home_min(s_stack *s)
+static int	home_min(t_stack *s)
 {
 	int	i;
 
@@ -25,7 +25,7 @@ static int	home_min(s_stack *s)
 	return (i--);
 }
 
-static void	original_idx(s_stack *s, int offset)
+static void	original_idx(t_stack *s, int offset)
 {
 	while (offset > 0)
 	{
@@ -35,10 +35,10 @@ static void	original_idx(s_stack *s, int offset)
 }
 
 //Finds the first longest lis
-void	lis_controller(s_stack *s, s_arr *lis)
+void	lis_controller(t_stack *s, t_arr *lis)
 {
-	s_arr	*tails;
-	s_arr	*prev;
+	t_arr	*tails;
+	t_arr	*prev;
 	int		i;
 	int		offset;
 

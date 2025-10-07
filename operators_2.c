@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   operators_2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noobdevbot2 <noobdevbot2@student.42.fr>    +#+  +:+       +#+        */
+/*   By: jsoh <jsoh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 15:20:01 by noobdevbot2       #+#    #+#             */
-/*   Updated: 2025/10/06 15:51:42 by noobdevbot2      ###   ########.fr       */
+/*   Updated: 2025/10/07 11:51:51 by jsoh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "more_pushswap.h"
+#include "push_swap.h"
 
-void	ft_ra_rb(s_stack *s, int c, int n)
+void	ft_ra_rb(t_stack *s, int c, int n)
 {
 	int	i;
 
@@ -21,13 +21,13 @@ void	ft_ra_rb(s_stack *s, int c, int n)
 		return ;
 	while (i < n)
 	{
-		printf("r%c\n",c);
+		ft_printf("r%c\n", c);
 		rotate_up(s);
 		i++;
 	}
 }
 
-void	ft_rra_rrb(s_stack *s, int c, int n)
+void	ft_rra_rrb(t_stack *s, int c, int n)
 {
 	int	i;
 
@@ -36,13 +36,13 @@ void	ft_rra_rrb(s_stack *s, int c, int n)
 		return ;
 	while (i < n)
 	{
-		printf("rr%c\n",c);
+		ft_printf("rr%c\n", c);
 		rotate_down(s);
 		i++;
 	}
 }
 
-void	ft_rr(s_stack *a, s_stack *b, int n)
+void	ft_rr(t_stack *a, t_stack *b, int n)
 {
 	int	i;
 
@@ -51,14 +51,14 @@ void	ft_rr(s_stack *a, s_stack *b, int n)
 		return ;
 	while (i < n)
 	{
-		printf("rr\n");
+		ft_printf("rr\n");
 		rotate_up(a);
 		rotate_up(b);
 		i++;
 	}
 }
 
-void	ft_rrr(s_stack *a, s_stack *b, int n)
+void	ft_rrr(t_stack *a, t_stack *b, int n)
 {
 	int	i;
 
@@ -67,7 +67,7 @@ void	ft_rrr(s_stack *a, s_stack *b, int n)
 		return ;
 	while (i < n)
 	{
-		printf("rrr\n");
+		ft_printf("rrr\n");
 		rotate_down(a);
 		rotate_down(b);
 		i++;

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   math_1.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noobdevbot2 <noobdevbot2@student.42.fr>    +#+  +:+       +#+        */
+/*   By: jsoh <jsoh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/24 16:56:20 by jsoh              #+#    #+#             */
-/*   Updated: 2025/10/06 15:02:12 by noobdevbot2      ###   ########.fr       */
+/*   Updated: 2025/10/07 11:51:18 by jsoh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "more_pushswap.h"
+#include "push_swap.h"
 
-int	get_max_index(const s_stack *s)
+int	get_max_index(const t_stack *s)
 {
 	int	index;
 	int	max_num;
@@ -33,7 +33,7 @@ int	get_max_index(const s_stack *s)
 	return (max_index);
 }
 
-int	get_min_index(const s_stack *s)
+int	get_min_index(const t_stack *s)
 {
 	int	index;
 	int	min;
@@ -44,7 +44,7 @@ int	get_min_index(const s_stack *s)
 	min = s -> array[min_index].val;
 	while (index < s -> cnt)
 	{
-		if (s -> array[index].val <= min)
+		if (s -> array[index].val < min)
 		{
 			min = s -> array[index].val;
 			min_index = index;
@@ -54,8 +54,7 @@ int	get_min_index(const s_stack *s)
 	return (min_index);
 }
 
-int	get_max_num(const s_stack *s)
+int	get_max_num(const t_stack *s)
 {
-	return(s -> array[get_max_index(s)].val);
+	return (s -> array[get_max_index(s)].val);
 }
-

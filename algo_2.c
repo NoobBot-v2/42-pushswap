@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   algo_2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noobdevbot2 <noobdevbot2@student.42.fr>    +#+  +:+       +#+        */
+/*   By: jsoh <jsoh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/05 13:55:03 by jsoh              #+#    #+#             */
-/*   Updated: 2025/10/06 16:41:50 by noobdevbot2      ###   ########.fr       */
+/*   Updated: 2025/10/07 11:49:45 by jsoh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "more_pushswap.h"
+#include "push_swap.h"
 
-static int	home_min(s_stack *s)
+static int	home_min(t_stack *s)
 {
 	int	i;
 
@@ -25,7 +25,7 @@ static int	home_min(s_stack *s)
 	return (i--);
 }
 
-static void	original_idx(s_stack *s, int offset)
+static void	original_idx(t_stack *s, int offset)
 {
 	while (offset > 0)
 	{
@@ -34,7 +34,7 @@ static void	original_idx(s_stack *s, int offset)
 	}
 }
 
-static int	ft_mod_binary_search(s_stack *s, int value)
+static int	ft_mod_binary_search(t_stack *s, int value)
 {
 	int	start;
 	int	end;
@@ -53,45 +53,42 @@ static int	ft_mod_binary_search(s_stack *s, int value)
 		else
 			end = mid - 1;
 	}
-	original_idx(s,offset);
+	original_idx(s, offset);
 	return ((start + offset) % s -> cnt);
 }
 
-static void	find_best_move(s_stack *a, s_stack *b, s_rcost *best_cost, int *best_idx)
+static void	ft_best_move(t_stack *a, t_stack *b, t_rcost *best, int *best_idx)
 {
-	int	i;
-	int	dest_posn;
-	s_rcost	cost;
+	int		i;
+	int		dest_posn;
+	t_rcost	cost;
 
 	i = 0;
-	best_cost->total = INT_MAX;
+	best->total = INT_MAX;
 	*best_idx = 0;
-
 	while (i < b->cnt)
 	{
 		dest_posn = ft_mod_binary_search(a, b->array[i].index);
 		cost = ft_calculate_cost(dest_posn, i, a->cnt, b->cnt);
-		if (cost.total < best_cost->total)
+		if (cost.total < best->total)
 		{
-			*best_cost = cost;
+			*best = cost;
 			*best_idx = i;
 		}
 		i++;
 	}
 }
 
-void	algo_2(s_stack *a, s_stack *b, s_arr *lis, int *grand_total)
+void	algo_2(t_stack *a, t_stack *b)
 {
 	int		best_idx;
-	s_rcost	best_cost;
+	t_rcost	best_cost;
 
 	while (b->cnt > 0)
 	{
-		find_best_move(a, b, &best_cost, &best_idx);
-		*grand_total += best_cost.total;
+		ft_best_move(a, b, &best_cost, &best_idx);
 		ft_consume_cost(a, b, &best_cost);
-		printf("pa\n");
+		ft_printf("pa\n");
 		push(b, a);
-		(*grand_total)++;
 	}
 }
