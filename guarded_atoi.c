@@ -6,7 +6,7 @@
 /*   By: jsoh <jsoh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/07 21:57:13 by jsoh              #+#    #+#             */
-/*   Updated: 2025/10/07 22:04:59 by jsoh             ###   ########.fr       */
+/*   Updated: 2025/10/07 22:11:29 by jsoh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,10 @@ int	ft_guarded_atoi(const char *nptr, int *error)
 	{
 		number *= 10;
 		number += (*nptr - '0');
+		if (number > INT_MAX || (number * sign) < INT_MIN)
+			*error = 1;
 		nptr++;
 	}
 	number *= sign;
-	if (number > INT_MAX || number < INT_MIN)
-		*error = 1;
 	return ((int) number);
 }

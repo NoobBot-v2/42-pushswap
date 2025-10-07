@@ -6,7 +6,7 @@
 /*   By: jsoh <jsoh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/04 11:21:05 by jsoh              #+#    #+#             */
-/*   Updated: 2025/10/07 21:48:06 by jsoh             ###   ########.fr       */
+/*   Updated: 2025/10/07 22:09:48 by jsoh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	rotate_to_top(t_stack *s, int idx)
 		ft_rra_rrb(s, 'a', (s -> cnt - idx));
 }
 
-void	ft_error_msg()
+void	ft_error_msg(void)
 {
 	write(2, "Error\n", 6);
 }

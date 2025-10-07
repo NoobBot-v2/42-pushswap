@@ -6,7 +6,7 @@
 /*   By: jsoh <jsoh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/06 17:30:38 by jsoh              #+#    #+#             */
-/*   Updated: 2025/10/07 22:03:21 by jsoh             ###   ########.fr       */
+/*   Updated: 2025/10/07 22:09:56 by jsoh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int		get_min_index(const t_stack *s);
 int		ft_guarded_atoi(const char *nptr, int *error);
 int		ft_not_valid_numbers(char const *argv);
 int		ft_check_dupes(t_stack *s);
-void	ft_error_msg();
+void	ft_error_msg(void);
 
 void	rotate_to_top(t_stack *s, int idx);
 void	radix_sort(t_stack *s1);
