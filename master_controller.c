@@ -6,7 +6,7 @@
 /*   By: jsoh <jsoh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 15:41:10 by noobdevbot2       #+#    #+#             */
-/*   Updated: 2025/10/07 17:07:45 by jsoh             ###   ########.fr       */
+/*   Updated: 2025/10/09 21:53:35 by jsoh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,25 +42,18 @@ static void	ft_free_str_arr(const char **s)
 
 int	ft_init(t_stack **a, t_arr **lis, int argc, char const **argv)
 {
-	const char	**str_arr;
+	char	**str_arr;
 
 	*a = NULL;
 	*lis = NULL;
-	if (argc == 2)
+	str_arr = ft_combine(argc, argv);
+	stack_create(a, ft_arr_len((const char **)str_arr), 'a');
+	if (stack_init(*a, (const char **)str_arr))
 	{
-		str_arr = (const char **)ft_split(argv[1], ' ');
-		stack_create(a, ft_arr_len(str_arr), 'a');
-		if (stack_init(*a, str_arr))
-			return (1);
-		ft_free_str_arr(str_arr);
+		ft_free_str_arr((const char **)str_arr);
+		return (1);
 	}
-	else
-	{
-		str_arr = argv + 1;
-		stack_create(a, argc - 1, 'a');
-		if (stack_init(*a, str_arr))
-			return (1);
-	}
+	ft_free_str_arr((const char **)str_arr);
 	radix_controller(*a);
 	ft_init_arr(lis, (*a)-> cap);
 	lis_controller(*a,*lis);

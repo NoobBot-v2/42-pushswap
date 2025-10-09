@@ -19,7 +19,8 @@ SRC = math_1.c \
 	guard_1.c \
 	3_sort.c \
 	5_sort.c \
-	guarded_atoi.c
+	guarded_atoi.c \
+	combiner.c 
 
 OBJ = $(SRC:.c=.o)
 
