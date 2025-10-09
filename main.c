@@ -6,7 +6,7 @@
 /*   By: jsoh <jsoh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/06 17:51:00 by jsoh              #+#    #+#             */
-/*   Updated: 2025/10/09 22:11:48 by jsoh             ###   ########.fr       */
+/*   Updated: 2025/10/09 23:37:33 by jsoh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,7 @@ int	main(int argc, char const *argv[])
 	ft_init_ptrs(&stack_a, &stack_b, &lis);
 	status = 0;
 	if (argc == 1 || argv[1][0] == '\0')
-	{
-		ft_error_msg();
 		return (0);
-	}
 	if (ft_init(&stack_a, &lis, argc, argv))
 		status = 1;
 	else if (ft_check_dupes(stack_a))
